@@ -1,0 +1,82 @@
+import sqlite3
+from config import DATABASE
+
+
+def get_connection():
+    return sqlite3.connect(DATABASE)
+
+
+def create_tables():
+
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    # Patient table
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS patient (
+            patient_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            email TEXT NOT NULL UNIQUE,
+            phone TEXT NOT NULL,
+            date_of_birth TEXT,
+            gender TEXT,
+            address TEXT,
+            password TEXT NOT NULL
+        )
+    """)
+
+    # Doctor table
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS doctor (
+            doctor_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            specialization TEXT NOT NULL,
+            email TEXT NOT NULL UNIQUE,
+            phone TEXT NOT NULL,
+            password TEXT NOT NULL,
+            status TEXT DEFAULT 'Pending'
+        )
+    """)
+
+    # Time Slot table
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS time_slot (
+            slot_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            doctor_id INTEGER NOT NULL,
+            date TEXT NOT NULL,
+            start_time TEXT NOT NULL,
+            end_time TEXT NOT NULL,
+            is_available INTEGER DEFAULT 1,
+
+            FOREIGN KEY (doctor_id)
+            REFERENCES doctor(doctor_id)
+        )
+    """)
+
+    # Appointment table
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS appointment (
+            appointment_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            patient_id INTEGER NOT NULL,
+            doctor_id INTEGER NOT NULL,
+            slot_id INTEGER NOT NULL,
+            status TEXT DEFAULT 'Pending',
+
+            FOREIGN KEY (patient_id)
+            REFERENCES patient(patient_id),
+
+            FOREIGN KEY (doctor_id)
+            REFERENCES doctor(doctor_id),
+
+            FOREIGN KEY (slot_id)
+            REFERENCES time_slot(slot_id)
+        )
+    """)
+
+    connection.commit()
+    connection.close()
+
+
+if __name__ == "__main__":
+    create_tables()
+

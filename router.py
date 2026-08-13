@@ -1,5 +1,6 @@
 from controllers.home_controller import HomeController
 from controllers.static_controller import StaticController
+from controllers.register_controller import RegisterController
 class Router:
     @staticmethod
     def handle_get(request): 
@@ -9,6 +10,7 @@ class Router:
         
         routes={
               "/": HomeController.index,
+              "/register":RegisterController.show,
               }
         
         handler = routes.get(request.path)
@@ -21,7 +23,24 @@ class Router:
 
     @staticmethod
     def handle_post(request):
+
+     print("POST PATH:", request.path)
+
+     routes = {
+        "/register": RegisterController.register,
+     }
+
+     handler = routes.get(request.path)
+
+     if handler:
+        print("HANDLER FOUND")
+        handler(request)
+     else:
+        print("HANDLER NOT FOUND")
         Router.not_found(request)
+
+
+ 
 
     @staticmethod
     def not_found(request):
