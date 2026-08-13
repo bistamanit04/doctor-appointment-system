@@ -24,8 +24,6 @@ class Router:
     @staticmethod
     def handle_post(request):
 
-     print("POST PATH:", request.path)
-
      routes = {
         "/register": RegisterController.register,
      }
@@ -33,17 +31,17 @@ class Router:
      handler = routes.get(request.path)
 
      if handler:
-        print("HANDLER FOUND")
+      
         handler(request)
      else:
-        print("HANDLER NOT FOUND")
+       
         Router.not_found(request)
 
 
  
 
     @staticmethod
-    def not_found(request):
+    def not_found(request):   
         request.send_response(404)
         request.send_header("content-type","text/html")
         request.end_headers()
