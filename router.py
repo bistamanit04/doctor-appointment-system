@@ -1,6 +1,7 @@
 from controllers.home_controller import HomeController
 from controllers.static_controller import StaticController
 from controllers.register_controller import RegisterController
+from controllers.login_controller import LoginController
 class Router:
     @staticmethod
     def handle_get(request): 
@@ -11,6 +12,7 @@ class Router:
         routes={
               "/": HomeController.index,
               "/register":RegisterController.show,
+              "/login":LoginController.show,
               }
         
         handler = routes.get(request.path)
@@ -26,6 +28,7 @@ class Router:
 
      routes = {
         "/register": RegisterController.register,
+        "/login": LoginController.login,
      }
 
      handler = routes.get(request.path)

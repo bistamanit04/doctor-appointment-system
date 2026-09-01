@@ -1,9 +1,22 @@
 import sqlite3
 from config import DATABASE
+import hashlib
 
 
 def get_connection():
     return sqlite3.connect(DATABASE)
+
+
+
+def hash_password(password):
+
+    return hashlib.pbkdf2_hmac(
+        "sha256",
+        password.encode("utf-8"),
+        b"doctor_appointment_salt",
+        100000
+    ).hex()
+
 
 
 def create_tables():
@@ -72,6 +85,9 @@ def create_tables():
             REFERENCES time_slot(slot_id)
         )
     """)
+
+
+
 
     connection.commit()
     connection.close()

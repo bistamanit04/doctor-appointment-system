@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{title}</title>
+
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        min-height: 100vh;
+        background: #eef5f9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* Main Container */
+      .container {
+        width: 90%;
+        max-width: 1050px;
+        min-height: 650px;
+        display: flex;
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
+      }
+
+      /* Left Side */
+      .left-section {
+        width: 45%;
+        background: linear-gradient(135deg, #087f8c, #00a6a6);
+        color: white;
+        padding: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .logo {
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 55px;
+      }
+
+      .logo i {
+        margin-right: 10px;
+      }
+
+      .left-section h1 {
+        font-size: 40px;
+        line-height: 1.2;
+        margin-bottom: 20px;
+      }
+
+      .left-section p {
+        font-size: 17px;
+        line-height: 1.7;
+      }
+
+      .doctor-icon {
+        width: 170px;
+        height: 170px;
+        margin: 40px auto 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 90px;
+      }
+
+      /* Right Side */
+      .login-section {
+        width: 55%;
+        padding: 45px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .login-box {
+        width: 100%;
+        max-width: 420px;
+      }
+
+      .login-box h2 {
+        font-size: 32px;
+        color: #17324d;
+        margin-bottom: 8px;
+      }
+
+      .subtitle {
+        color: #777;
+        margin-bottom: 25px;
+      }
+
+      /* Labels */
+      label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 7px;
+        color: #333;
+      }
+
+      /* Select */
+      select {
+        width: 100%;
+        padding: 13px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        margin-bottom: 18px;
+        font-size: 15px;
+        outline: none;
+      }
+
+      /* Input */
+      .input-box {
+        position: relative;
+        margin-bottom: 18px;
+      }
+
+      .input-box i {
+        position: absolute;
+        left: 14px;
+        top: 14px;
+        color: #777;
+      }
+
+      .input-box input {
+        width: 100%;
+        padding: 13px 13px 13px 42px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 15px;
+        outline: none;
+      }
+
+      .input-box input:focus {
+        border-color: #00a6a6;
+      }
+
+      /* Remember */
+      .options {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        font-size: 14px;
+      }
+
+      .remember {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-weight: normal;
+      }
+
+      .remember input {
+        width: 16px;
+        height: 16px;
+      }
+
+      .options a {
+        color: #008c95;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      /* Login Button */
+      .login-btn {
+        width: 100%;
+        padding: 14px;
+        border: none;
+        border-radius: 8px;
+        background: #008c95;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .login-btn:hover {
+        background: #006f76;
+      }
+
+      /* OR */
+      .divider {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 25px 0;
+        color: #999;
+      }
+
+      .divider::before,
+      .divider::after {
+        content: "";
+        height: 1px;
+        background: #ddd;
+        flex: 1;
+      }
+
+      /* Social Buttons */
+      .social {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        font-size: 15px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .social i {
+        margin-right: 10px;
+        font-size: 18px;
+      }
+
+      /* Google */
+      .google {
+        background: white;
+        border: 1px solid #ccc;
+        color: #333;
+      }
+
+      .google:hover {
+        background: #f5f5f5;
+      }
+
+      /* Facebook */
+      .facebook {
+        background: #1877f2;
+        border: none;
+        color: white;
+      }
+
+      .facebook:hover {
+        background: #0d65d3;
+      }
+
+      /* Guest */
+      .guest {
+        background: #555;
+        border: none;
+        color: white;
+      }
+
+      .guest:hover {
+        background: #333;
+      }
+
+      /* Signup */
+      .signup {
+        text-align: center;
+        margin-top: 20px;
+        color: #777;
+      }
+
+      .signup a {
+        color: #008c95;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      /* Footer */
+      .footer {
+        text-align: center;
+        position: fixed;
+        bottom: 10px;
+        left: 0;
+        right: 0;
+        color: #777;
+        font-size: 13px;
+      }
+
+      /* Mobile */
+      @media (max-width: 800px) {
+        body {
+          padding: 20px;
+        }
+
+        .container {
+          flex-direction: column;
+          width: 100%;
+        }
+
+        .left-section,
+        .login-section {
+          width: 100%;
+        }
+
+        .left-section {
+          padding: 35px;
+          text-align: center;
+        }
+
+        .left-section h1 {
+          font-size: 30px;
+        }
+
+        .logo {
+          margin-bottom: 25px;
+        }
+
+        .doctor-icon {
+          width: 110px;
+          height: 110px;
+          font-size: 60px;
+          margin-top: 25px;
+        }
+
+        .login-section {
+          padding: 30px 20px;
+        }
+
+        .footer {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- LEFT SIDE -->
+      <div class="left-section">
+        <div class="logo">
+          <i class="fa-solid fa-stethoscope"></i>
+          MedCare
+        </div>
+
+        <h1>
+          Your Health,<br />
+          Our Priority
+        </h1>
+
+        <p>
+          Book appointments with trusted doctors, manage your appointments and
+          take care of your health easily.
+        </p>
+
+        <div class="doctor-icon">
+          <i class="fa-solid fa-user-doctor"></i>
+        </div>
+      </div>
+
+      <!-- RIGHT SIDE -->
+      <div class="login-section">
+        <div class="login-box">
+          <h2>Welcome Back!</h2>
+
+          <p class="subtitle">Login to your Doctor Appointment Account</p>
+
+          <!-- LOGIN FORM -->
+          <form method="POST" action="/login">
+            <label for="userType">Login As</label>
+            <select id="userType" name="account">
+              <option value="patient">Patient</option>
+              <option value="doctor">Doctor</option>
+              <option value="admin">Admin</option>
+            </select>
+            
+            <label for="email"> Email Address </label>
+
+            <div class="input-box">
+              <i class="fa-solid fa-envelope"></i>
+
+              <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                name="email"
+                required
+              />
+            </div>
+
+            <label for="password"> Password </label>
+
+            <div class="input-box">
+              <i class="fa-solid fa-lock"></i>
+
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter your password"
+                required
+              />
+            </div>
+
+            <div class="options">
+              <label class="remember">
+                <input type="checkbox" />
+                Remember Me
+              </label>
+
+              <a href="#"> Forgot Password? </a>
+            </div>
+
+            <button type="submit" class="login-btn">
+              <i class="fa-solid fa-right-to-bracket"></i>
+              Login
+            </button>
+          </form>
+
+          <!-- DIVIDER -->
+          <div class="divider">
+            <span>OR</span>
+          </div>
+
+          <!-- GOOGLE -->
+          <button class="social google" type="button">
+            <i class="fa-brands fa-google"></i>
+
+            Continue with Google
+          </button>
+
+          <!-- FACEBOOK -->
+          <button class="social facebook" type="button">
+            <i class="fa-brands fa-facebook-f"></i>
+
+            Continue with Facebook
+          </button>
+
+          <!-- GUEST -->
+          <button class="social guest" type="button">
+            <i class="fa-solid fa-user"></i>
+
+            Continue as Guest
+          </button>
+
+          <!-- SIGN UP -->
+          <p class="signup">
+            Don't have an account?
+
+            <a href="#"> Create Account </a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">© 2026 MedCare Doctor Appointment System</div>
+  </body>
+</html>
