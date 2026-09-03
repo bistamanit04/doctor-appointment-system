@@ -1,0 +1,275 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/static/css/dash.css" />
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{{title}}</title>
+  </head>
+
+  <body>
+    <script src="design.js" defer></script>
+    <script src="dashboard.js" defer></script>
+
+    <div class="dashboard-wrapper">
+      <!-- ===== Sidebar ===== -->
+      <aside class="sidebar" id="sidebar">
+        <div class="logo">
+          <img src="/static/img/logo.png" alt="logo" />
+          <div>
+            <h2>MedCare</h2>
+          </div>
+        </div>
+
+        <ul class="sidebar-nav">
+          <li class="active">
+            <a href="/patient/dashboard"><span class="icon">🏠</span> Dashboard</a>
+          </li>
+          <li>
+            <a href="#"><span class="icon">📅</span> My Appointments</a>
+          </li>
+          <li>
+            <a href="/login"><span class="icon">🔍</span> Find Doctor</a>
+          </li>
+          <li>
+            <a href="#"><span class="icon">💊</span> Prescriptions</a>
+          </li>
+          <li>
+            <a href="#"><span class="icon">💬</span> Messages</a>
+          </li>
+          <li>
+            <a href="#"><span class="icon">⚙️</span> Settings</a>
+          </li>
+        </ul>
+
+        <div class="sidebar-footer">
+          <a href="index.html"><span class="icon">↩️</span> Log Out</a>
+        </div>
+      </aside>
+
+      <!-- ===== Main ===== -->
+      <div class="dashboard-main">
+        <header class="dashboard-topbar">
+          <button class="menu-toggle" id="menuToggle">&#9776;</button>
+
+          <div class="topbar-search">
+            <input type="text" placeholder="Search doctors, records..." />
+          </div>
+
+          <div class="topbar-right">
+            <div class="topbar-icon">
+              🔔
+              <span class="dot"></span>
+            </div>
+            <div class="topbar-profile">
+              <img src="/static/img/doctor.jpeg" alt="patient avatar" />
+              <div>
+                <div class="name">{{name}}</div>
+                <div class="role">Patient</div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <div class="dashboard-content">
+          <!-- Welcome banner -->
+          <div class="welcome-banner">
+            <div>
+              <h1>Welcome back, {{name}} 👋</h1>
+              <p>
+                You have an upcoming appointment with Dr. Sarah Kim tomorrow
+                at 10:30 AM. Stay on top of your health this week.
+              </p>
+            </div>
+            <button onclick="window.location.href='index.html'">
+              Book New Appointment
+            </button>
+          </div>
+
+          <!-- Stat cards -->
+          <div class="dash-stats">
+            <div class="dash-stat-card">
+              <div class="dash-stat-icon icon-blue">📅</div>
+              <div>
+                <h3>3</h3>
+                <p>Upcoming Appointments</p>
+              </div>
+            </div>
+
+            <div class="dash-stat-card">
+              <div class="dash-stat-icon icon-green">✅</div>
+              <div>
+                <h3>12</h3>
+                <p>Completed Visits</p>
+              </div>
+            </div>
+
+            <div class="dash-stat-card">
+              <div class="dash-stat-icon icon-orange">💊</div>
+              <div>
+                <h3>4</h3>
+                <p>Active Prescriptions</p>
+              </div>
+            </div>
+
+            <div class="dash-stat-card">
+              <div class="dash-stat-icon icon-purple">💬</div>
+              <div>
+                <h3>2</h3>
+                <p>Unread Messages</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Main grid -->
+          <div class="dash-grid">
+            <div>
+              <!-- Upcoming appointments -->
+              <div class="panel">
+                <div class="panel-header">
+                  <h2>Upcoming Appointments</h2>
+                  <a href="#">View All</a>
+                </div>
+
+                <div class="appt-row">
+                  <img src="/static/img/doctor.jpeg" alt="Dr. Sarah Kim" />
+                  <div class="appt-info">
+                    <h4>Dr. Sarah Kim</h4>
+                    <span>Dermatologist</span>
+                  </div>
+                  <div class="appt-time">Tomorrow, 10:30 AM</div>
+                  <span class="status-badge status-upcoming">Upcoming</span>
+                </div>
+
+                <div class="appt-row">
+                  <img src="/static/img/doctor.jpeg" alt="Dr. Mike Lee" />
+                  <div class="appt-info">
+                    <h4>Dr. Mike Lee</h4>
+                    <span>Cardiologist</span>
+                  </div>
+                  <div class="appt-time">Fri, 2:00 PM</div>
+                  <span class="status-badge status-upcoming">Upcoming</span>
+                </div>
+
+                <div class="appt-row">
+                  <img src="/static/img/doctor.jpeg" alt="Dr. Emily Davis" />
+                  <div class="appt-info">
+                    <h4>Dr. Emily Davis</h4>
+                    <span>Neurologist</span>
+                  </div>
+                  <div class="appt-time">Mon, 9:00 AM</div>
+                  <span class="status-badge status-pending">Pending</span>
+                </div>
+
+                <div class="appt-row">
+                  <img src="/static/img/doctor.jpeg" alt="Dr. John Carter" />
+                  <div class="appt-info">
+                    <h4>Dr. John Carter</h4>
+                    <span>Pediatrician</span>
+                  </div>
+                  <div class="appt-time">Aug 22, 11:00 AM</div>
+                  <span class="status-badge status-completed">Completed</span>
+                </div>
+              </div>
+
+              <!-- Recent prescriptions -->
+              <div class="panel">
+                <div class="panel-header">
+                  <h2>Recent Prescriptions</h2>
+                  <a href="#">View All</a>
+                </div>
+
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Medicine</th>
+                      <th>Prescribed By</th>
+                      <th>Date</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Amoxicillin 500mg</td>
+                      <td>Dr. John Carter</td>
+                      <td>Aug 22, 2026</td>
+                      <td><span class="status-badge status-completed">Active</span></td>
+                    </tr>
+                    <tr>
+                      <td>Loratadine 10mg</td>
+                      <td>Dr. Sarah Kim</td>
+                      <td>Aug 10, 2026</td>
+                      <td><span class="status-badge status-completed">Active</span></td>
+                    </tr>
+                    <tr>
+                      <td>Atorvastatin 20mg</td>
+                      <td>Dr. Mike Lee</td>
+                      <td>Jul 02, 2026</td>
+                      <td><span class="status-badge status-pending">Refill Due</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Side column -->
+            <div>
+              <div class="panel">
+                <div class="panel-header">
+                  <h2>Your Doctors</h2>
+                  <a href="index.html">Find More</a>
+                </div>
+
+                <div class="mini-card">
+                  <img src="/static/img/doctor.jpeg" alt="Dr. Sarah Kim" />
+                  <div>
+                    <h4>Dr. Sarah Kim</h4>
+                    <span>Dermatologist</span>
+                  </div>
+                </div>
+
+                <div class="mini-card">
+                  <img src="/static/img/doctor.jpeg" alt="Dr. Mike Lee" />
+                  <div>
+                    <h4>Dr. Mike Lee</h4>
+                    <span>Cardiologist</span>
+                  </div>
+                </div>
+
+                <div class="mini-card">
+                  <img src="/static/img/doctor.jpeg" alt="Dr. Emily Davis" />
+                  <div>
+                    <h4>Dr. Emily Davis</h4>
+                    <span>Neurologist</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel">
+                <div class="panel-header">
+                  <h2>Health Summary</h2>
+                </div>
+
+                <p style="font-size: 13px; color: #888; margin-bottom: 4px;">
+                  Annual checkup completion
+                </p>
+                <div class="progress-track">
+                  <div class="progress-fill" style="width: 75%;"></div>
+                </div>
+
+                <p style="font-size: 13px; color: #888; margin: 16px 0 4px;">
+                  Vaccination status
+                </p>
+                <div class="progress-track">
+                  <div class="progress-fill" style="width: 100%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
