@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/static/css/docprof.css" />
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Dr. Sarah Kim | Doctor Profile</title>
+  </head>
+
+  <body>
+    <script src="/static/js/docprof.js" defer></script>
+
+    <div class="page-wrap">
+      <a href="/doctors" class="back-link">&larr; Back</a>
+
+      <div class="profile-card">
+        <!-- Header -->
+        <div class="card-header">
+          <img class="avatar-img" src="/static/img/doctor.jpeg" alt="Dr. Sarah Kim" />
+          <div>
+            <h1 class="profile-name">Dr. Sarah Kim</h1>
+            <p class="profile-role">Dermatologist</p>
+            <span class="status-pill status-approved"
+              ><i class="dot"></i>Approved</span
+            >
+          </div>
+        </div>
+
+        <!-- Professional Information -->
+        <div class="card-section">
+          <h2 class="section-title">Professional Information</h2>
+
+          <div class="info-row">
+            <span class="info-label">Specialization</span>
+            <span class="info-value">Dermatologist</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Email</span>
+            <span class="info-value">sarah@email.com</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Phone</span>
+            <span class="info-value">98XXXXXXXX</span>
+          </div>
+        </div>
+
+        <!-- Appointment Information -->
+        <div class="card-section">
+          <h2 class="section-title">Appointment Information</h2>
+
+          <div class="info-row">
+            <span class="info-label">Upcoming Appointments</span>
+            <span class="info-value strong" id="upcomingCount">12</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Available Time Slots</span>
+            <span class="info-value strong" id="slotsLeftCount">6</span>
+          </div>
+        </div>
+
+        <!-- Available Slots -->
+        <div class="card-section">
+          <h2 class="section-title">Available Slots</h2>
+
+          <div class="booking-notice" id="bookingNotice">
+            You already have an approved appointment for
+            <strong id="noticeDateTime"></strong>. Cancel it to book a different
+            slot.
+          </div>
+
+          <div class="slot-row" data-date="Sep 10" data-time="10:30 AM">
+            <span class="slot-date">Sep 10</span>
+            <span class="slot-time">10:30 AM</span>
+            <button class="book-slot-btn" onclick="toggleSlotBooking(this)">
+              Book Appointment
+            </button>
+          </div>
+
+          <div class="slot-row" data-date="Sep 10" data-time="11:30 AM">
+            <span class="slot-date">Sep 10</span>
+            <span class="slot-time">11:30 AM</span>
+            <button class="book-slot-btn" onclick="toggleSlotBooking(this)">
+              Book Appointment
+            </button>
+          </div>
+
+          <div class="slot-row" data-date="Sep 11" data-time="02:00 PM">
+            <span class="slot-date">Sep 11</span>
+            <span class="slot-time">02:00 PM</span>
+            <button class="book-slot-btn" onclick="toggleSlotBooking(this)">
+              Book Appointment
+            </button>
+          </div>
+
+          <div class="slot-row" data-date="Sep 11" data-time="04:00 PM">
+            <span class="slot-date">Sep 11</span>
+            <span class="slot-time">04:00 PM</span>
+            <button class="book-slot-btn" onclick="toggleSlotBooking(this)">
+              Book Appointment
+            </button>
+          </div>
+
+          <div class="slot-row" data-date="Sep 12" data-time="09:00 AM">
+            <span class="slot-date">Sep 12</span>
+            <span class="slot-time">09:00 AM</span>
+            <button class="book-slot-btn" onclick="toggleSlotBooking(this)">
+              Book Appointment
+            </button>
+          </div>
+
+          <div class="slot-row" data-date="Sep 12" data-time="03:30 PM">
+            <span class="slot-date">Sep 12</span>
+            <span class="slot-time">03:30 PM</span>
+            <button class="book-slot-btn" onclick="toggleSlotBooking(this)">
+              Book Appointment
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast">
+      <span id="toastMsg">Appointment booked!</span>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,281 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+  background: #f7f9fc;
+  color: #222;
+  min-height: 100vh;
+}
+
+.page-wrap {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 30px 20px 70px;
+}
+
+.back-link {
+  display: inline-block;
+  text-decoration: none;
+  color: #666;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  transition: color 0.2s;
+}
+
+.back-link:hover {
+  color: #1a4fd6;
+}
+
+/* ----- Card ----- */
+.profile-card {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(26, 79, 214, 0.08);
+  overflow: hidden;
+}
+
+/* ----- Header ----- */
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 30px;
+}
+
+.avatar-img {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #eaf0ff;
+  flex-shrink: 0;
+}
+
+.profile-name {
+  font-size: 19px;
+  color: #111;
+  margin-bottom: 2px;
+}
+
+.profile-role {
+  font-size: 13px;
+  color: #888;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+/* ----- Sections ----- */
+.card-section {
+  padding: 22px 30px;
+  border-top: 1px solid #eef1f8;
+}
+
+.section-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a4fd6;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-bottom: 16px;
+}
+
+/* ----- Info rows (label : value) ----- */
+.info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 0;
+  font-size: 14px;
+}
+
+.info-label {
+  color: #888;
+  font-weight: 500;
+}
+
+.info-value {
+  color: #222;
+  font-weight: 600;
+  text-align: right;
+}
+
+.info-value.strong {
+  color: #1a4fd6;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* ----- Status pill (with dot) ----- */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 20px;
+  white-space: nowrap;
+  margin-right: 4px;
+}
+
+.status-pill .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  display: inline-block;
+}
+
+.status-approved {
+  background: #eaf0ff;
+  color: #1a4fd6;
+}
+
+.status-completed {
+  background: #e6f8ee;
+  color: #17a35a;
+}
+
+.status-cancelled {
+  background: #fdeaea;
+  color: #e5484d;
+}
+
+/* ----- Available slot rows ----- */
+.booking-notice {
+  display: none;
+  background: #eaf0ff;
+  color: #1a4fd6;
+  font-size: 13px;
+  line-height: 1.5;
+  padding: 12px 16px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+
+.booking-notice.show {
+  display: block;
+}
+
+.slot-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f3f5fa;
+  transition: opacity 0.2s;
+}
+
+.slot-row:last-child {
+  border-bottom: none;
+}
+
+.slot-row.slot-locked {
+  opacity: 0.45;
+}
+
+.slot-row.slot-approved {
+  background: #f7f9ff;
+  border-radius: 10px;
+  padding: 12px 12px;
+  opacity: 1;
+}
+
+.slot-date {
+  font-weight: 700;
+  color: #111;
+  font-size: 14px;
+  width: 56px;
+  flex-shrink: 0;
+}
+
+.slot-time {
+  color: #666;
+  font-size: 14px;
+  flex: 1;
+}
+
+.book-slot-btn {
+  border: 1px solid #1a4fd6;
+  background: #fff;
+  color: #1a4fd6;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.book-slot-btn:hover:not(:disabled) {
+  background: #1a4fd6;
+  color: #fff;
+}
+
+.book-slot-btn:disabled {
+  border-color: #d5dcf0;
+  color: #b8c1e0;
+  cursor: not-allowed;
+}
+
+.book-slot-btn.cancel-slot-btn {
+  border-color: #e5484d;
+  color: #e5484d;
+}
+
+.book-slot-btn.cancel-slot-btn:hover:not(:disabled) {
+  background: #e5484d;
+  color: #fff;
+}
+
+/* ----- Toast ----- */
+.toast {
+  position: fixed;
+  bottom: 26px;
+  right: 26px;
+  background: #17a35a;
+  color: #fff;
+  padding: 14px 20px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+  transform: translateY(20px);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  z-index: 100;
+}
+
+.toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* ----- Responsive ----- */
+@media (max-width: 480px) {
+  .card-header,
+  .card-section {
+    padding: 20px;
+  }
+
+  .slot-row {
+    flex-wrap: wrap;
+  }
+
+  .book-slot-btn {
+    margin-left: auto;
+  }
+
+  .toast {
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+  }
+}

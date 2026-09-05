@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/static/css/finddoc.css" />
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{{tite}}</title>
+  </head>
+
+  <body>
+    <script src="/static/js/finddoc.js" defer></script>
+
+    <div class="page-wrap">
+      <!-- Top bar -->
+      <div class="topbar">
+        <a href="index.html" class="brand">
+          <img src="/static/img/logo.png" alt="logo" />
+          <span>MedCare</span>
+        </a>
+        <a href="index.html" class="back-link">&larr; Back to Home</a>
+      </div>
+
+      <!-- Page heading -->
+      <div class="page-heading">
+        <h1>Find Your Doctor</h1>
+        <p>Browse trusted specialists and book the next available slot.</p>
+      </div>
+
+      <!-- Search & filters -->
+      <div class="search-bar">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search by name or specialty..."
+        />
+      </div>
+
+      <div class="filter-chips" id="filterChips">
+        <button class="chip active" data-filter="all">All</button>
+        <button class="chip" data-filter="Dermatologist">Dermatologist</button>
+        <button class="chip" data-filter="Cardiologist">Cardiologist</button>
+        <button class="chip" data-filter="Pediatrician">Pediatrician</button>
+        <button class="chip" data-filter="Neurologist">Neurologist</button>
+        <button class="chip" data-filter="Orthopedic Surgeon">
+          Orthopedic
+        </button>
+        <button class="chip" data-filter="Dentist">Dentist</button>
+      </div>
+
+      <p class="results-count" id="resultsCount">7 doctors available</p>
+
+      <!-- Doctor cards grid -->
+      <div class="doctor-grid" id="doctorGrid">
+        <!-- 1 -->
+         {% for doctor in doctors %}
+        <div
+          class="doctor-card"
+          data-specialty="{{doctor[2]}}"
+          data-name="{{doctor[1]}}"
+        >
+          <div class="doctor-card-top">
+            <img src="/static/img/doctor.jpeg" alt="{{doctor[1]}}" />
+            <div class="doctor-card-badge status-available">
+              Available Today
+            </div>
+          </div>
+          <h3>"{{doctor[1]}}"</h3>
+          <span class="tag-pill">{{doctor[2]}}</span>
+          <div class="rating-line">★★★★★ <span>4.9 (312)</span></div>
+          <div class="meta-line">
+            <span>🎓 9 yrs experience</span>
+            <span>📍 Patan</span>
+          </div>
+          <div class="slots-label">Next Available</div>
+          <div class="slots-row">
+            <span class="slot-chip">Today, 2:00 PM</span>
+            <span class="slot-chip">Today, 4:30 PM</span>
+            <span class="slot-chip">Tomorrow, 10:00 AM</span>
+          </div>
+          <div class="card-actions">
+            <button
+              class="btn-outline"
+              onclick="window.location.href = '/docprofile/{{doctor[0]}}'"
+            >
+              View Profile
+            </button>
+            <button
+              class="btn-solid"
+              onclick="window.location.href = '/docprofile/{{doctor[0]}}'"
+            >
+              Book Appointment
+            </button>
+          </div>
+        </div>
+      
+        {% endfor %}
+      <p class="no-results" id="noResults">No doctors match your search.</p>
+    </div>
+  </body>
+</html>
