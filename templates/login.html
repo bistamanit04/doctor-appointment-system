@@ -13,7 +13,7 @@
     />
 
     <style>
-       * {
+      * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
@@ -368,13 +368,12 @@
 
           <!-- LOGIN FORM -->
           <form method="POST" action="/login">
-            <label for="userType">Login As</label>
             <select id="userType" name="account">
               <option value="patient">Patient</option>
               <option value="doctor">Doctor</option>
               <option value="admin">Admin</option>
             </select>
-            
+
             <label for="email"> Email Address </label>
 
             <div class="input-box">
@@ -455,5 +454,18 @@
     </div>
 
     <div class="footer">© 2026 MedCare Doctor Appointment System</div>
+    <script>
+      function changeAccountType() {
+        const selectedAccount = document.querySelector(
+          'input[name="account"]:checked',
+        ).value;
+
+        document.getElementById("patient-fields").style.display =
+          selectedAccount === "patient" ? "block" : "none";
+
+        document.getElementById("doctor-fields").style.display =
+          selectedAccount === "doctor" ? "block" : "none";
+      }
+    </script>
   </body>
 </html>

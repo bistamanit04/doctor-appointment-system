@@ -15,7 +15,8 @@ body {
   width: 100%;
   max-width: 1300px;
   margin: 30px auto;
-  background: rgb(195, 220, 255);
+ 
+  background: linear-gradient(135deg,  #c0c8cf, #379bc9);
   border-radius: 20px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   padding: 30px;
@@ -36,13 +37,14 @@ nav {
 }
 
 .logo img {
-  width: 50px;
+  width: 200px;
   margin-right: 10px;
 }
 
 .logo h2 {
   color: #003366;
   font-size: 24px;
+  
 }
 
 .logo p {

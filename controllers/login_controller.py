@@ -82,43 +82,53 @@ class LoginController:
 
         connection.close()
 
+        # LOGIN SUCCESS
         if result:
+           user_id = result[0]
 
-            user_id = result[0]
+           session_id = create_session(
+           account,
+           user_id
+         )
+           request.send_response(302)
+           
+           if account == "patient":
+              request.send_header(
+              "Location",
+              "/patient/dashboard"
+             )
+              
+           elif account == "doctor":
+              request.send_header(
+            "Location",
+            "/doctor/dashboard"
+             )
 
-            session_id = create_session(
-                account,
-                user_id
-            )
-            print("LOGIN SUCCESS")
-            print("USER ID:", user_id)
-            print("SESSION ID:", session_id)
-
-            request.send_response(302)
-
+           else:
             request.send_header(
-                "Location",
-                "/patient/dashboard"
-            )
+            "Location",
+            "/login"
+          )
 
-            request.send_header(
-                "Set-Cookie",
-                f"session_id={session_id}; Path=/"
-            )
+           request.send_header(
+             "Set-Cookie",
+             f"session_id={session_id}; Path=/"
+             )
 
-            request.end_headers()
+           request.end_headers()
 
+# LOGIN FAILED
         else:
+        
+         request.send_response(401)
 
-            request.send_response(401)
+        request.send_header(
+         "Content-Type",
+        "text/html"
+        )
 
-            request.send_header(
-                "Content-Type",
-                "text/html"
-            )
+        request.end_headers()
 
-            request.end_headers()
-
-            request.wfile.write(
-                b"<h1>Invalid email or password.</h1>"
-            )
+        request.wfile.write(
+        b"<h1>Invalid email or password.</h1>"
+    )
