@@ -1,12 +1,12 @@
-<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>{{title}}</title>
 
-    <!-- Font Awesome Icons -->
+    <!-- Font Awesome -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -23,29 +23,41 @@
       body {
         min-height: 100vh;
         background: #eef5f9;
+
         display: flex;
         justify-content: center;
         align-items: center;
       }
 
-      /* Main Container */
+      /* MAIN CONTAINER */
+
       .container {
         width: 90%;
         max-width: 1050px;
         min-height: 650px;
+
         display: flex;
+
         background: white;
+
         border-radius: 20px;
+
         overflow: hidden;
+
         box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
       }
 
-      /* Left Side */
+      /* LEFT SECTION */
+
       .left-section {
         width: 45%;
+
         background: linear-gradient(135deg, #379bc9, #c0c8cf);
+
         color: white;
+
         padding: 50px;
+
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -54,6 +66,7 @@
       .logo {
         font-size: 28px;
         font-weight: bold;
+
         margin-bottom: 55px;
       }
 
@@ -64,6 +77,7 @@
       .left-section h1 {
         font-size: 40px;
         line-height: 1.2;
+
         margin-bottom: 20px;
       }
 
@@ -75,19 +89,34 @@
       .doctor-icon {
         width: 170px;
         height: 170px;
+
         margin: 40px auto 0;
+
         border-radius: 50%;
+
         background: rgb(195, 220, 255);
+
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 90px;
+
+        overflow: hidden;
       }
 
-      /* Right Side */
+      .doctor-icon img {
+        width: 200%;
+        height: 200%;
+
+        object-fit: contain;
+      }
+
+      /* RIGHT SECTION */
+
       .login-section {
         width: 55%;
+
         padding: 45px;
+
         display: flex;
         justify-content: center;
         align-items: center;
@@ -100,73 +129,108 @@
 
       .login-box h2 {
         font-size: 32px;
+
         color: #379bc9;
+
         margin-bottom: 8px;
       }
 
       .subtitle {
         color: #777;
+
         margin-bottom: 25px;
       }
 
-      /* Labels */
+      /* ERROR MESSAGE */
+
+      .login-error {
+        display: none;
+
+        background: #ffe6e6;
+
+        color: #c62828;
+
+        border: 1px solid #f3aaaa;
+
+        padding: 12px 14px;
+
+        border-radius: 8px;
+
+        margin-bottom: 18px;
+
+        font-size: 14px;
+
+        font-weight: bold;
+      }
+
+      /* LABELS */
+
       label {
         display: block;
+
         font-weight: bold;
+
         margin-bottom: 7px;
+
         color: #333;
       }
 
-      /* Select */
-      select {
-        width: 100%;
-        padding: 13px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        margin-bottom: 18px;
-        font-size: 15px;
-        outline: none;
-      }
+      /* INPUT */
 
-      /* Input */
       .input-box {
         position: relative;
+
         margin-bottom: 18px;
       }
 
       .input-box i {
         position: absolute;
+
         left: 14px;
         top: 14px;
+
         color: #777;
       }
 
       .input-box input {
         width: 100%;
+
         padding: 13px 13px 13px 42px;
+
         border: 1px solid #ccc;
+
         border-radius: 8px;
+
         font-size: 15px;
+
         outline: none;
       }
 
       .input-box input:focus {
-        border-color: #00a6a6;
+        border-color: #379bc9;
       }
 
-      /* Remember */
+      /* OPTIONS */
+
       .options {
         display: flex;
+
         justify-content: space-between;
+
         align-items: center;
+
         margin-bottom: 20px;
+
         font-size: 14px;
       }
 
       .remember {
         display: flex;
+
         align-items: center;
+
         gap: 6px;
+
         font-weight: normal;
       }
 
@@ -177,20 +241,31 @@
 
       .options a {
         color: #0fb8c4;
+
         text-decoration: none;
+
         font-weight: bold;
       }
 
-      /* Login Button */
+      /* LOGIN BUTTON */
+
       .login-btn {
         width: 100%;
+
         padding: 14px;
+
         border: none;
+
         border-radius: 8px;
+
         background: #379bc9;
+
         color: white;
+
         font-size: 16px;
+
         font-weight: bold;
+
         cursor: pointer;
       }
 
@@ -198,43 +273,60 @@
         background: #006f76;
       }
 
-      /* OR */
+      /* DIVIDER */
+
       .divider {
         display: flex;
+
         align-items: center;
+
         gap: 10px;
+
         margin: 25px 0;
+
         color: #0f2db1;
       }
 
       .divider::before,
       .divider::after {
         content: "";
+
         height: 1px;
+
         background: #ddd;
+
         flex: 1;
       }
 
-      /* Social Buttons */
+      /* SOCIAL BUTTONS */
+
       .social {
         width: 100%;
+
         padding: 12px;
+
         margin-bottom: 10px;
+
         border-radius: 8px;
+
         font-size: 15px;
+
         font-weight: bold;
+
         cursor: pointer;
       }
 
       .social i {
         margin-right: 10px;
+
         font-size: 18px;
       }
 
-      /* Google */
       .google {
         background: white;
+
         border: 1px solid #ccc;
+
         color: #333;
       }
 
@@ -242,10 +334,11 @@
         background: #f5f5f5;
       }
 
-      /* Facebook */
       .facebook {
         background: #1877f2;
+
         border: none;
+
         color: white;
       }
 
@@ -253,10 +346,11 @@
         background: #0d65d3;
       }
 
-      /* Guest */
       .guest {
         background: #555;
+
         border: none;
+
         color: white;
       }
 
@@ -264,31 +358,43 @@
         background: #333;
       }
 
-      /* Signup */
+      /* SIGN UP */
+
       .signup {
         text-align: center;
+
         margin-top: 20px;
+
         color: #777;
       }
 
       .signup a {
         color: #008c95;
+
         text-decoration: none;
+
         font-weight: bold;
       }
 
-      /* Footer */
+      /* FOOTER */
+
       .footer {
         text-align: center;
+
         position: fixed;
+
         bottom: 10px;
+
         left: 0;
         right: 0;
+
         color: #777;
+
         font-size: 13px;
       }
 
-      /* Mobile */
+      /* MOBILE */
+
       @media (max-width: 800px) {
         body {
           padding: 20px;
@@ -296,6 +402,7 @@
 
         .container {
           flex-direction: column;
+
           width: 100%;
         }
 
@@ -306,6 +413,7 @@
 
         .left-section {
           padding: 35px;
+
           text-align: center;
         }
 
@@ -318,9 +426,9 @@
         }
 
         .doctor-icon {
-          width: 170px;
-          height: 170px;
-          font-size: 60px;
+          width: 150px;
+          height: 150px;
+
           margin-top: 25px;
         }
 
@@ -338,14 +446,17 @@
   <body>
     <div class="container">
       <!-- LEFT SIDE -->
+
       <div class="left-section">
         <div class="logo">
           <i class="fa-solid fa-stethoscope"></i>
+
           MedCare
         </div>
 
         <h1>
           Your Health,<br />
+
           Our Priority
         </h1>
 
@@ -360,19 +471,25 @@
       </div>
 
       <!-- RIGHT SIDE -->
+
       <div class="login-section">
         <div class="login-box">
           <h2>Welcome Back!</h2>
 
           <p class="subtitle">Login to your Doctor Appointment Account</p>
 
+          <!-- ERROR MESSAGE -->
+
+          <div id="loginError" class="login-error"></div>
+
           <!-- LOGIN FORM -->
-          <form method="POST" action="/login">
-            <select id="userType" name="account">
-              <option value="patient">Patient</option>
-              <option value="doctor">Doctor</option>
-              <option value="admin">Admin</option>
-            </select>
+
+          <form
+            method="POST"
+            action="/login"
+            onsubmit="return validateLogin();"
+          >
+            <!-- EMAIL -->
 
             <label for="email"> Email Address </label>
 
@@ -382,11 +499,13 @@
               <input
                 type="email"
                 id="email"
-                placeholder="Enter your email"
                 name="email"
+                placeholder="Enter your email"
                 required
               />
             </div>
+
+            <!-- PASSWORD -->
 
             <label for="password"> Password </label>
 
@@ -398,31 +517,40 @@
                 id="password"
                 name="password"
                 placeholder="Enter your password"
+                minlength="6"
                 required
               />
             </div>
 
+            <!-- OPTIONS -->
+
             <div class="options">
               <label class="remember">
                 <input type="checkbox" />
+
                 Remember Me
               </label>
 
               <a href="#"> Forgot Password? </a>
             </div>
 
+            <!-- LOGIN -->
+
             <button type="submit" class="login-btn">
               <i class="fa-solid fa-right-to-bracket"></i>
+
               Login
             </button>
           </form>
 
           <!-- DIVIDER -->
+
           <div class="divider">
             <span>OR</span>
           </div>
 
           <!-- GOOGLE -->
+
           <button class="social google" type="button">
             <i class="fa-brands fa-google"></i>
 
@@ -430,6 +558,7 @@
           </button>
 
           <!-- FACEBOOK -->
+
           <button class="social facebook" type="button">
             <i class="fa-brands fa-facebook-f"></i>
 
@@ -437,6 +566,7 @@
           </button>
 
           <!-- GUEST -->
+
           <button class="social guest" type="button">
             <i class="fa-solid fa-user"></i>
 
@@ -444,28 +574,86 @@
           </button>
 
           <!-- SIGN UP -->
+
           <p class="signup">
             Don't have an account?
 
-            <a href="#"> Create Account </a>
+            <a href="/register"> Create Account </a>
           </p>
         </div>
       </div>
     </div>
 
+    <!-- FOOTER -->
+
     <div class="footer">© 2026 MedCare Doctor Appointment System</div>
+
     <script>
-      function changeAccountType() {
-        const selectedAccount = document.querySelector(
-          'input[name="account"]:checked',
-        ).value;
+      /* --------------------------------
+   CLIENT-SIDE VALIDATION
+-------------------------------- */
 
-        document.getElementById("patient-fields").style.display =
-          selectedAccount === "patient" ? "block" : "none";
+      function validateLogin() {
+        const email = document.getElementById("email").value.trim();
 
-        document.getElementById("doctor-fields").style.display =
-          selectedAccount === "doctor" ? "block" : "none";
+        const password = document.getElementById("password").value;
+
+        if (email === "") {
+          showLoginError("Please enter your email.");
+
+          return false;
+        }
+
+        if (password === "") {
+          showLoginError("Please enter your password.");
+
+          return false;
+        }
+
+        if (password.length < 6) {
+          showLoginError("Password must be at least 6 characters.");
+
+          return false;
+        }
+
+        return true;
       }
+
+      /* --------------------------------
+   SHOW ERROR
+-------------------------------- */
+
+      function showLoginError(message) {
+        const errorBox = document.getElementById("loginError");
+
+        errorBox.textContent = message;
+
+        errorBox.style.display = "block";
+      }
+
+      /* --------------------------------
+   GET ERROR FROM URL
+-------------------------------- */
+
+      window.addEventListener("DOMContentLoaded", function () {
+        const params = new URLSearchParams(window.location.search);
+
+        const error = params.get("error");
+
+        if (error) {
+          showLoginError(error);
+        }
+      });
+
+      document.getElementById("email").addEventListener("input", function () {
+        document.getElementById("loginError").style.display = "none";
+      });
+
+      document
+        .getElementById("password")
+        .addEventListener("input", function () {
+          document.getElementById("loginError").style.display = "none";
+        });
     </script>
   </body>
 </html>

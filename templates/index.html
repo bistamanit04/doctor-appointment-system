@@ -1,80 +1,237 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
-    <link rel="stylesheet" href="static/css/style.css" />
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Doctor Appointment System</title>
-    <style></style>
+    <title>MedCare</title>
+
+    <link rel="stylesheet" href="static/css/style.css" />
   </head>
 
   <body>
-    <script src="static/js/script.js"></script>
     <div class="container">
+      <!-- ================= NAVBAR ================= -->
+
       <nav>
         <div class="logo">
-          <img src="static/img/logo.png" alt="logo" />
+          <img src="static/img/logo.png" alt="MedCare" />
 
-          <div>
-            <h2>MedCare</h2>
-          </div>
+          <h2>MedCare</h2>
         </div>
 
         <ul class="menu">
-          <li><a href="/doctors">Find Doctor</a></li>
+          <li>
+            <a href="/doctors">Find Doctor</a>
+          </li>
 
-          <li><a href="#">Emergency Services</a></li>
+          <li>
+            <a href="#">Emergency Services</a>
+          </li>
 
-          <li><a href="#">Support</a></li>
+          <li>
+            <a href="#">Support</a>
+          </li>
         </ul>
 
         <div class="buttons">
-          <button class="signin" href="/login">Sign In</button>
+          <button type="button" id="registerBtn">Register</button>
 
-          <button class="appointment">Appointment</button>
+          <button type="button" class="appointment" id="appointmentBtn">
+            Appointment
+          </button>
         </div>
       </nav>
 
-      <div class="arrowL" onclick="scrollUp()"></div>
+      <!-- ================= LEFT ARROW ================= -->
 
-      <div class="carousel" id="carousel">
-        <div class="hero">
-          <div class="left">
-            <small>WELCOME TO HEALTH SYNC SERVICES</small>
+      <button type="button" class="carousel-btn prev" id="prevBtn">
+        &#10094;
+      </button>
 
-            <h1>
-              Find the Right Doctor,<br />
+      <!-- ================= CAROUSEL ================= -->
 
-              Right When You<br />
-            </h1>
+      <div class="carousel">
+        <div class="carousel-track" id="carouselTrack">
+          <!-- ================= SLIDE 1 ================= -->
 
-            <p>
-              Connecting you to trusted doctors and helping you make better
-              health decisions.
-            </p>
+          <div class="slide">
+            <div class="hero">
+              <div class="left">
+                <small> WELCOME TO HEALTH SYNC SERVICES </small>
 
-            <button type="button" onclick="window.location.href = '/login'">
-              Login / Sign In
-            </button>
+                <h1>
+                  Find the Right Doctor,<br />
+                  Right When You
+                </h1>
+
+                <p>
+                  Connecting you to trusted doctors and helping you make better
+                  health decisions.
+                </p>
+
+                <button type="button" id="loginBtn">Login / Sign In</button>
+              </div>
+
+              <div class="right">
+                <img src="static/img/doctor.jpeg" alt="Doctor" />
+              </div>
+            </div>
           </div>
 
-          <div class="right">
-            <img src="static/img/doctor.jpeg" alt="doctor" />
-          </div>
-        </div>
+          <!-- ================= SLIDE 2 ================= -->
 
-        <div class="profile-carousel" id="profileCarousel">
-          <div class="profile-card">
-            <img src="static/img/doctor.jpeg" alt="Mike Lee" />
-            <h3>Mike Lee</h3>
-            <p>3rd Place</p>
+          <div class="slide profile-slide">
+            <div class="profile-card">
+              <div class="doctor-image">
+                <img src="static/img/doctor.jpeg" alt="Mike Lee" />
+              </div>
+
+              <div class="doctor-info">
+                <span class="badge"> FEATURED DOCTOR </span>
+
+                <h2>Mike Lee</h2>
+
+                <p class="place">3rd Place</p>
+
+                <h3>General Physician</h3>
+
+                <p class="description">
+                  Experienced and trusted doctor providing quality healthcare
+                  and personalized treatment for patients.
+                </p>
+
+                <div class="doctor-stats">
+                  <div>
+                    <strong>10+</strong>
+                    <span>Years Experience</span>
+                  </div>
+
+                  <div>
+                    <strong>500+</strong>
+                    <span>Patients</span>
+                  </div>
+
+                  <div>
+                    <strong>4.9</strong>
+                    <span>Rating</span>
+                  </div>
+                </div>
+
+                <button type="button" class="profileBtn">View Profile</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= SLIDE 3 ================= -->
+
+          <div class="slide profile-slide">
+            <div class="profile-card">
+              <div class="doctor-image">
+                <img src="static/img/doctor.jpeg" alt="Sarah Wilson" />
+              </div>
+
+              <div class="doctor-info">
+                <span class="badge"> TOP SPECIALIST </span>
+
+                <h2>Sarah Wilson</h2>
+
+                <p class="place">2nd Place</p>
+
+                <h3>Cardiologist</h3>
+
+                <p class="description">
+                  Providing compassionate cardiac care with modern diagnostic
+                  and treatment options.
+                </p>
+
+                <div class="doctor-stats">
+                  <div>
+                    <strong>12+</strong>
+                    <span>Years Experience</span>
+                  </div>
+
+                  <div>
+                    <strong>700+</strong>
+                    <span>Patients</span>
+                  </div>
+
+                  <div>
+                    <strong>4.8</strong>
+                    <span>Rating</span>
+                  </div>
+                </div>
+
+                <button type="button" class="profileBtn">View Profile</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= SLIDE 4 ================= -->
+
+          <div class="slide profile-slide">
+            <div class="profile-card">
+              <div class="doctor-image">
+                <img src="static/img/doctor.jpeg" alt="David Smith" />
+              </div>
+
+              <div class="doctor-info">
+                <span class="badge"> BEST DOCTOR </span>
+
+                <h2>David Smith</h2>
+
+                <p class="place">1st Place</p>
+
+                <h3>Neurologist</h3>
+
+                <p class="description">
+                  Dedicated to providing advanced neurological care with a
+                  patient-focused approach.
+                </p>
+
+                <div class="doctor-stats">
+                  <div>
+                    <strong>15+</strong>
+                    <span>Years Experience</span>
+                  </div>
+
+                  <div>
+                    <strong>900+</strong>
+                    <span>Patients</span>
+                  </div>
+
+                  <div>
+                    <strong>5.0</strong>
+                    <span>Rating</span>
+                  </div>
+                </div>
+
+                <button type="button" class="profileBtn">View Profile</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="arrow" onclick="scrollDown()"></div>
+      <!-- ================= RIGHT ARROW ================= -->
+
+      <button type="button" class="carousel-btn next" id="nextBtn">
+        &#10095;
+      </button>
+
+      <!-- ================= DOTS ================= -->
+
+      <div class="dots">
+        <button type="button" class="dot active" data-slide="0"></button>
+
+        <button type="button" class="dot" data-slide="1"></button>
+
+        <button type="button" class="dot" data-slide="2"></button>
+
+        <button type="button" class="dot" data-slide="3"></button>
+      </div>
+
+      <!-- ================= STATISTICS ================= -->
 
       <div class="stats">
         <div class="stat">
@@ -103,6 +260,8 @@
       </div>
     </div>
 
-    <script></script>
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script src="static/js/script.js"></script>
   </body>
 </html>

@@ -1,190 +1,614 @@
+/* =========================================
+   RESET
+========================================= */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* =========================================
+   BODY
+========================================= */
+
 body {
   background: #c0e0ff;
+
+  min-height: 100vh;
+
+  overflow-x: hidden;
 }
 
-/* Container */
+/* =========================================
+   CONTAINER
+========================================= */
 
 .container {
-  width: 100%;
+  position: relative;
+
+  width: calc(100% - 60px);
+
   max-width: 1300px;
-  margin: 30px auto;
- 
-  background: linear-gradient(135deg,  #c0c8cf, #379bc9);
-  border-radius: 20px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+
+  min-height: 850px;
+
+  margin: 15px auto;
+
   padding: 30px;
+
+  background: linear-gradient(135deg, #c0c8cf, #379bc9);
+
+  border-radius: 20px;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+
+  overflow: hidden;
 }
 
-/* Navbar */
+/* =========================================
+   NAVBAR
+========================================= */
 
 nav {
+  position: relative;
+
+  z-index: 50;
+
   display: flex;
+
   justify-content: space-between;
+
   align-items: center;
-  flex-wrap: wrap;
+
+  width: 100%;
 }
+
+/* =========================================
+   LOGO
+========================================= */
 
 .logo {
   display: flex;
+
   align-items: center;
+
+  gap: 10px;
 }
 
 .logo img {
-  width: 200px;
-  margin-right: 10px;
+  width: 100px;
+
+  height: 75px;
+
+  object-fit: contain;
 }
 
 .logo h2 {
   color: #003366;
+
   font-size: 24px;
-  
 }
 
-.logo p {
-  color: gray;
-  font-size: 14px;
-}
+/* =========================================
+   MENU
+========================================= */
 
 .menu {
   list-style: none;
+
   display: flex;
+
   gap: 20px;
 }
 
-.menu li a {
+.menu a {
+  display: block;
+
   text-decoration: none;
+
   color: #333;
-  padding: 10px 15px;
-  border-radius: 20px;
+
   background: #fbfcfc;
-}
 
-.menu li a:hover {
-  background: #3b73ff;
-  color: rgb(197, 215, 245);
-}
+  padding: 10px 15px;
 
-.buttons button {
-  padding: 10px 18px;
-  border: none;
   border-radius: 20px;
-  cursor: pointer;
-  margin-left: 10px;
+
+  transition: 0.3s;
 }
 
-.signin {
-  background: #eeeeee;
-}
-
-.appointment {
+.menu a:hover {
   background: #3b73ff;
+
   color: white;
 }
 
-/* Hero Section */
+/* =========================================
+   NAV BUTTONS
+========================================= */
+
+.buttons {
+  display: flex;
+
+  gap: 10px;
+}
+
+.buttons button {
+  border: none;
+
+  padding: 10px 18px;
+
+  border-radius: 20px;
+
+  background: white;
+
+  color: #222;
+
+  cursor: pointer;
+
+  font-size: 14px;
+}
+
+.buttons .appointment {
+  background: #3b73ff;
+
+  color: white;
+}
+
+.buttons button:hover {
+  transform: translateY(-2px);
+}
+
+/* =========================================
+   CAROUSEL
+========================================= */
+
+.carousel {
+  width: 100%;
+
+  overflow: hidden;
+
+  margin-top: 20px;
+
+  position: relative;
+
+  z-index: 1;
+}
+
+/* =========================================
+   CAROUSEL TRACK
+========================================= */
+
+.carousel-track {
+  display: flex;
+
+  width: 100%;
+
+  transition: transform 0.6s ease;
+
+  will-change: transform;
+}
+
+/* =========================================
+   SLIDES
+
+   VERY IMPORTANT:
+   EVERY SLIDE IS EXACTLY 100%
+========================================= */
+
+.slide {
+  flex: 0 0 100%;
+
+  width: 100%;
+
+  min-width: 100%;
+
+  height: 500px;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  padding: 20px 40px;
+}
+
+/* =========================================
+   HERO
+========================================= */
 
 .hero {
+  width: 100%;
+
   display: flex;
+
   justify-content: space-between;
+
   align-items: center;
-  margin-top: 50px;
-  flex-wrap: wrap;
+
+  gap: 40px;
 }
 
 .left {
-  width: 50%;
+  width: 52%;
 }
 
 .left small {
   color: #555;
+
+  font-size: 14px;
 }
 
 .left h1 {
-  font-size: 55px;
-  margin: 20px 0;
   color: #111;
+
+  font-size: 55px;
+
+  line-height: 1.15;
+
+  margin: 20px 0;
 }
 
 .left p {
-  font-size: 18px;
   color: #555;
+
+  font-size: 18px;
+
+  line-height: 1.5;
+
+  max-width: 600px;
+
   margin-bottom: 30px;
 }
 
 .left button {
-  padding: 15px 35px;
   border: none;
-  background: #3b73ff;
-  color: white;
-  font-size: 18px;
+
+  padding: 15px 35px;
+
   border-radius: 10px;
+
+  background: #3b73ff;
+
+  color: white;
+
+  font-size: 18px;
+
   cursor: pointer;
+
+  transition: 0.3s;
 }
 
 .left button:hover {
   background: #2458da;
+
+  transform: translateY(-2px);
 }
 
+/* =========================================
+   HERO IMAGE
+========================================= */
+
 .right {
-  width: 40%;
-  text-align: center;
-  position: relative;
+  width: 45%;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
 }
 
 .right img {
   width: 100%;
-  max-width: 400px;
+
+  max-width: 480px;
+
+  height: 400px;
+
+  object-fit: contain;
+
+  background: white;
 }
 
-/* Arrow */
+/* =========================================
+   PROFILE CARD
+========================================= */
 
-.arrow {
-  position: absolute;
-  right: 180px;
-  top: 45%;
-  width: 60px;
-  height: 60px;
-  border: 3px solid #3b73ff;
-  border-radius: 50%;
-  text-align: center;
-  line-height: 55px;
-  font-size: 30px;
+.profile-card {
+  width: 90%;
+
+  max-width: 950px;
+
+  min-height: 390px;
+
+  padding: 40px 55px;
+
+  background: white;
+
+  border-radius: 25px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 60px;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* =========================================
+   DOCTOR IMAGE
+========================================= */
+
+.doctor-image {
+  flex-shrink: 0;
+}
+
+.doctor-image img {
+  width: 270px;
+
+  height: 270px;
+
+  object-fit: cover;
+
+  border-radius: 25px;
+
+  display: block;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* =========================================
+   DOCTOR INFO
+========================================= */
+
+.doctor-info {
+  max-width: 430px;
+
+  text-align: left;
+}
+
+.badge {
+  display: inline-block;
+
+  padding: 6px 13px;
+
+  margin-bottom: 10px;
+
+  border-radius: 20px;
+
+  background: #e7f0ff;
+
   color: #3b73ff;
+
+  font-size: 12px;
+
+  font-weight: bold;
+}
+
+.doctor-info h2 {
+  color: #003366;
+
+  font-size: 38px;
+
+  margin-bottom: 5px;
+}
+
+.place {
+  color: #3b73ff;
+
+  font-weight: bold;
+
+  margin-bottom: 18px;
+}
+
+.doctor-info h3 {
+  color: #222;
+
+  font-size: 22px;
+
+  margin-bottom: 12px;
+}
+
+.description {
+  color: #666;
+
+  font-size: 16px;
+
+  line-height: 1.5;
+
+  margin-bottom: 20px;
+}
+
+/* =========================================
+   DOCTOR STATS
+========================================= */
+
+.doctor-stats {
+  display: flex;
+
+  gap: 25px;
+
+  margin-bottom: 25px;
+}
+
+.doctor-stats div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+.doctor-stats strong {
+  font-size: 19px;
+
+  color: #222;
+}
+
+.doctor-stats span {
+  font-size: 12px;
+
+  color: #777;
+}
+
+/* =========================================
+   PROFILE BUTTON
+========================================= */
+
+.profileBtn {
+  border: none;
+
+  padding: 12px 28px;
+
+  border-radius: 10px;
+
+  background: #3b73ff;
+
+  color: white;
+
+  font-size: 16px;
+
   cursor: pointer;
 }
 
-.arrowL {
-  position: absolute;
-  left: 180px;
-  top: 45%;
-  width: 60px;
-  height: 60px;
-  border: 3px solid #3b73ff;
-  border-radius: 50%;
-  text-align: center;
-  line-height: 55px;
-  font-size: 30px;
-  color: #3b73ff;
-  cursor: pointer;
+.profileBtn:hover {
+  background: #2458da;
 }
 
-/* Statistics */
+/* =========================================
+   CAROUSEL BUTTONS
+========================================= */
+
+.carousel-btn {
+  position: absolute;
+
+  top: 47%;
+
+  z-index: 100;
+
+  width: 55px;
+
+  height: 55px;
+
+  border: 3px solid #3b73ff;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.8);
+
+  color: #3b73ff;
+
+  font-size: 25px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  transition: 0.3s;
+}
+
+.carousel-btn.prev {
+  left: 5px;
+}
+
+.carousel-btn.next {
+  right: 5px;
+}
+
+.carousel-btn:hover {
+  background: #3b73ff;
+
+  color: white;
+
+  transform: scale(1.1);
+}
+
+.carousel-btn:active {
+  transform: scale(0.95);
+}
+
+/* =========================================
+   DOTS
+========================================= */
+
+.dots {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin-top: 0;
+
+  position: relative;
+
+  z-index: 20;
+}
+
+.dot {
+  width: 10px;
+
+  height: 10px;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.7);
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.dot.active {
+  width: 28px;
+
+  border-radius: 10px;
+
+  background: #3b73ff;
+}
+
+/* =========================================
+   STATISTICS
+========================================= */
 
 .stats {
-  margin-top: 50px;
+  margin-top: 20px;
+
+  width: 100%;
+
   display: flex;
+
   justify-content: space-around;
+
+  align-items: center;
+
   background: #f5f5f5;
-  padding: 30px;
+
+  padding: 25px;
+
   border-radius: 15px;
-  flex-wrap: wrap;
+
+  position: relative;
+
+  z-index: 10;
 }
 
 .stat {
@@ -192,89 +616,151 @@ nav {
 }
 
 .stat h2 {
-  font-size: 35px;
   color: #222;
+
+  font-size: 35px;
 }
 
 .stat p {
   color: #666;
 }
 
-/* Responsive */
+/* =========================================
+   TABLET
+========================================= */
 
-@media (max-width: 900px) {
-  .hero {
-    flex-direction: column;
+@media (max-width: 1000px) {
+  .menu {
+    gap: 8px;
   }
 
-  .left,
-  .right {
-    width: 100%;
-    text-align: center;
+  .menu a {
+    padding: 8px 10px;
+
+    font-size: 13px;
   }
 
   .left h1 {
-    font-size: 40px;
+    font-size: 42px;
+  }
+
+  .profile-card {
+    width: 95%;
+
+    gap: 30px;
+
+    padding: 30px;
+  }
+
+  .doctor-image img {
+    width: 220px;
+
+    height: 220px;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 800px) {
+  .container {
+    width: calc(100% - 20px);
+
+    padding: 20px;
+
+    min-height: auto;
+  }
+
+  nav {
+    flex-direction: column;
+
+    gap: 20px;
   }
 
   .menu {
-    margin: 20px 0;
     flex-wrap: wrap;
+
     justify-content: center;
   }
 
-  .arrow {
-    display: none;
+  .buttons {
+    justify-content: center;
+  }
+
+  .slide {
+    height: auto;
+
+    min-height: 650px;
+
+    padding: 30px 20px;
+  }
+
+  .hero {
+    flex-direction: column;
+
+    text-align: center;
+  }
+
+  .left {
+    width: 100%;
+  }
+
+  .left h1 {
+    font-size: 38px;
+  }
+
+  .left p {
+    margin-left: auto;
+
+    margin-right: auto;
+  }
+
+  .right {
+    width: 100%;
+  }
+
+  .right img {
+    height: 280px;
+  }
+
+  .profile-card {
+    flex-direction: column;
+
+    width: 95%;
+
+    padding: 30px 20px;
+
+    gap: 25px;
+
+    text-align: center;
+  }
+
+  .doctor-info {
+    text-align: center;
+  }
+
+  .doctor-image img {
+    width: 200px;
+
+    height: 200px;
+  }
+
+  .doctor-stats {
+    justify-content: center;
+  }
+
+  .carousel-btn {
+    width: 45px;
+
+    height: 45px;
+
+    font-size: 20px;
   }
 
   .stats {
     flex-direction: column;
+
     gap: 20px;
   }
-}
-.carousel {
-  display: -webkit-inline-box;
-  overflow-x: auto;
-  gap: 260px;
-  padding: 10px;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-}
-
-.carousel::-webkit-scrollbar {
-  display: none; /* Hide scrollbar */
-}
-/* Profile carousel wrapper */
-.profile-section {
-  display: flex;
-  align-items: center;
-  margin-top: 50px;
-}
-
-/* Only profiles scroll */
-.profile-carousel {
-  display: flex;
-  gap: 30px;
-  overflow: hidden;
-  width: 100%;
-  padding: 20px;
-  scroll-behavior: smooth;
-}
-
-/* Profile card */
-.profile-card {
-  min-width: 250px;
-  background: white;
-  padding: 25px;
-  border-radius: 20px;
-  text-align: center;
-  flex-shrink: 0;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-}
-
-.profile-card img {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  object-fit: cover;
 }

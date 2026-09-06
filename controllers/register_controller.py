@@ -73,14 +73,16 @@ class RegisterController:
                 password
             ))
 
-        connection.commit()
-        connection.close()
+      # Registration successful
 
-        request.send_response(200)
-        request.send_header("Content-Type", "text/html")
+            connection.commit()
+            connection.close()
+        
+        request.send_response(302)
+        request.send_header("Location", "/login")
         request.end_headers()
+        return
+        
+    
 
-        request.wfile.write(
-            b"<h1>Account created successfully!</h1>"
-        )
-
+     
