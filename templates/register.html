@@ -26,7 +26,7 @@
       }
 
       header {
-       background: linear-gradient(135deg, #379bc9, #c0c8cf);
+        background: linear-gradient(135deg, #379bc9, #c0c8cf);
         color: white;
         padding: 18px 7%;
         display: flex;
@@ -88,6 +88,53 @@
         margin-bottom: 20px;
         border-bottom: 2px solid #eee;
         padding-bottom: 10px;
+      }
+
+      /* FORM-LEVEL ERROR BANNER */
+
+      .form-error {
+        display: none;
+        align-items: flex-start;
+        gap: 10px;
+        background: #ffe6e6;
+        color: #c62828;
+        border: 1px solid #f3aaaa;
+        padding: 12px 14px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        font-weight: bold;
+      }
+
+      .form-error i {
+        font-size: 16px;
+        margin-top: 2px;
+      }
+
+      .form-error ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      /* FIELD-LEVEL ERROR */
+
+      .field-error {
+        color: #c62828;
+        font-size: 12px;
+        font-weight: bold;
+        margin-top: 5px;
+        display: none;
+      }
+
+      .form-group.invalid input,
+      .form-group.invalid select {
+        border-color: #c62828;
+      }
+
+      .form-group.invalid .field-error {
+        display: block;
       }
 
       .user-type {
@@ -317,7 +364,7 @@
       <nav>
         <a href="/"><i class="fa-solid fa-house"></i> Home</a>
         <a href="#"><i class="fa-solid fa-calendar-check"></i> Appointment</a>
-        <a href="#"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+        <a href="/login"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
       </nav>
     </header>
 
@@ -328,12 +375,24 @@
       </div>
 
       <div class="register-card">
+        <!-- FORM-LEVEL ERROR BANNER -->
+        <div
+          id="registerError"
+          class="form-error"
+          style="display: {{error_display}};"
+        >
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <ul id="registerErrorList">
+            <li>{{error}}</li>
+          </ul>
+        </div>
+
         <h2 class="section-title">
           <i class="fa-solid fa-user-plus"></i>
           Account Type
         </h2>
 
-        <form method="POST" action="/register">
+        <form method="POST" action="/register" id="registerForm" novalidate>
           <div class="user-type">
             <label class="type-card">
               <i class="fa-solid fa-user"></i>
@@ -365,7 +424,7 @@
           </h2>
 
           <div class="form-grid">
-            <div class="form-group full">
+            <div class="form-group full" id="group-fullname">
               <label for="fullname">Full Name</label>
               <div class="input-box">
                 <i class="fa-solid fa-user"></i>
@@ -377,9 +436,13 @@
                   required
                 />
               </div>
+              <span class="field-error"
+                >Enter your full name (letters only, at least 2
+                characters).</span
+              >
             </div>
 
-            <div class="form-group">
+            <div class="form-group" id="group-email">
               <label for="email">Email Address</label>
               <div class="input-box">
                 <i class="fa-solid fa-envelope"></i>
@@ -391,9 +454,10 @@
                   required
                 />
               </div>
+              <span class="field-error">Enter a valid email address.</span>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" id="group-phone">
               <label for="phone">Phone Number</label>
               <div class="input-box">
                 <i class="fa-solid fa-phone"></i>
@@ -405,32 +469,41 @@
                   required
                 />
               </div>
+              <span class="field-error"
+                >Enter a valid phone number (7-15 digits).</span
+              >
             </div>
 
             <div id="patient-fields" class="form-group full">
               <div class="form-grid">
-                <div class="form-group">
+                <div class="form-group" id="group-dob">
                   <label>Date of Birth</label>
-                  <input type="date" name="date_of_birth" />
+                  <input type="date" id="date_of_birth" name="date_of_birth" />
+                  <span class="field-error"
+                    >Enter a valid date of birth (not in the future).</span
+                  >
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" id="group-gender">
                   <label>Gender</label>
-                  <select name="gender">
+                  <select name="gender" id="gender">
                     <option value="">Select Gender</option>
                     <option>Male</option>
                     <option>Female</option>
                     <option>Other</option>
                   </select>
+                  <span class="field-error">Please select a gender.</span>
                 </div>
 
-                <div class="form-group full">
+                <div class="form-group full" id="group-address">
                   <label>Address</label>
                   <input
                     type="text"
+                    id="address"
                     name="address"
                     placeholder="Enter your address"
                   />
+                  <span class="field-error">Enter your address.</span>
                 </div>
               </div>
             </div>
@@ -441,11 +514,38 @@
               style="display: none"
             >
               <label>Specialization</label>
-              <input
-                type="text"
-                name="specialization"
-                placeholder="e.g. Cardiologist"
-              />
+              <select id="specialization" name="specialization">
+                <option value="">Select Specialization</option>
+                <option>Cardiology</option>
+                <option>Dermatology</option>
+                <option>Endocrinology</option>
+                <option>Family Medicine</option>
+                <option>Gastroenterology</option>
+                <option>General Surgery</option>
+                <option>Geriatrics</option>
+                <option>Gynecology &amp; Obstetrics</option>
+                <option>Hematology</option>
+                <option>Infectious Disease</option>
+                <option>Internal Medicine</option>
+                <option>Nephrology</option>
+                <option>Neurology</option>
+                <option>Neurosurgery</option>
+                <option>Oncology</option>
+                <option>Ophthalmology</option>
+                <option>Orthopedics</option>
+                <option>Otolaryngology (ENT)</option>
+                <option>Pediatrics</option>
+                <option>Physiotherapy</option>
+                <option>Plastic Surgery</option>
+                <option>Psychiatry</option>
+                <option>Pulmonology</option>
+                <option>Radiology</option>
+                <option>Rheumatology</option>
+                <option>Urology</option>
+                <option>Dentistry</option>
+                <option>Other</option>
+              </select>
+              <span class="field-error">Please select a specialization.</span>
             </div>
           </div>
 
@@ -455,27 +555,49 @@
           </h2>
 
           <div class="form-grid">
-            <div class="form-group">
+            <div class="form-group" id="group-password">
               <label>Password</label>
               <div class="input-box">
                 <i class="fa-solid fa-lock"></i>
-                <input type="password" name="password" minlength="6" required />
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  minlength="6"
+                  required
+                />
               </div>
+              <p class="password-info">
+                At least 6 characters, with a letter and a number.
+              </p>
+              <span class="field-error"
+                >Password must be at least 6 characters and include a letter and
+                a number.</span
+              >
             </div>
 
-            <div class="form-group">
+            <div class="form-group" id="group-confirm-password">
               <label>Confirm Password</label>
               <div class="input-box">
                 <i class="fa-solid fa-lock"></i>
-                <input type="password" name="confirm_password" required />
+                <input
+                  type="password"
+                  id="confirm_password"
+                  name="confirm_password"
+                  required
+                />
               </div>
+              <span class="field-error">Passwords do not match.</span>
             </div>
           </div>
 
-          <label class="terms">
-            <input type="checkbox" name="terms" required />
-            I agree to the <a href="#">Terms & Conditions</a>
+          <label class="terms" id="group-terms">
+            <input type="checkbox" id="terms" name="terms" required />
+            I agree to the <a href="#">Terms &amp; Conditions</a>
           </label>
+          <span class="field-error" id="terms-error" style="margin-left: 26px"
+            >You must agree to the Terms &amp; Conditions.</span
+          >
 
           <button type="submit" class="create-btn">
             <i class="fa-solid fa-user-plus"></i>
@@ -490,18 +612,239 @@
     </footer>
 
     <script>
+      /* --------------------------------
+         ACCOUNT TYPE TOGGLE
+      -------------------------------- */
+
       function changeAccountType() {
-        const selectedAccount = document.querySelector(
+        const isDoctor =
+          document.querySelector('input[name="account"]:checked').value ===
+          "doctor";
+
+        document.getElementById("patient-fields").style.display = isDoctor
+          ? "none"
+          : "block";
+
+        document.getElementById("doctor-fields").style.display = isDoctor
+          ? "block"
+          : "none";
+      }
+
+      /* --------------------------------
+         VALIDATION HELPERS
+      -------------------------------- */
+
+      function setFieldError(groupId, hasError) {
+        const group = document.getElementById(groupId);
+        if (!group) return;
+        group.classList.toggle("invalid", hasError);
+      }
+
+      function isValidEmail(value) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+      }
+
+      function isValidPhone(value) {
+        const digits = value.replace(/\D/g, "");
+        return digits.length >= 7 && digits.length <= 15;
+      }
+
+      function isValidName(value) {
+        return /^[A-Za-z ]{2,}$/.test(value.trim());
+      }
+
+      function isStrongPassword(value) {
+        return (
+          value.length >= 6 && /[A-Za-z]/.test(value) && /[0-9]/.test(value)
+        );
+      }
+
+      function isPastOrTodayDate(value) {
+        if (!value) return false;
+        const entered = new Date(value);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        return entered <= today;
+      }
+
+      /* --------------------------------
+         MAIN VALIDATION
+      -------------------------------- */
+
+      function validateRegister() {
+        const errors = [];
+
+        const accountType = document.querySelector(
           'input[name="account"]:checked',
         ).value;
 
-        document.getElementById("patient-fields").style.display =
-          selectedAccount === "patient" ? "block" : "none";
+        const name = document.getElementById("fullname").value;
+        const email = document.getElementById("email").value;
+        const phone = document.getElementById("phone").value;
+        const password = document.getElementById("password").value;
+        const confirmPassword =
+          document.getElementById("confirm_password").value;
+        const termsChecked = document.getElementById("terms").checked;
 
-        document.getElementById("doctor-fields").style.display =
-          selectedAccount === "doctor" ? "block" : "none";
+        setFieldError("group-fullname", false);
+        setFieldError("group-email", false);
+        setFieldError("group-phone", false);
+        setFieldError("group-dob", false);
+        setFieldError("group-gender", false);
+        setFieldError("group-address", false);
+        setFieldError("group-password", false);
+        setFieldError("group-confirm-password", false);
+        document.getElementById("terms-error").style.display = "none";
+
+        if (!isValidName(name)) {
+          setFieldError("group-fullname", true);
+          errors.push("Enter your full name using letters only.");
+        }
+
+        if (!isValidEmail(email)) {
+          setFieldError("group-email", true);
+          errors.push("Enter a valid email address.");
+        }
+
+        if (!isValidPhone(phone)) {
+          setFieldError("group-phone", true);
+          errors.push("Enter a valid phone number (7-15 digits).");
+        }
+
+        if (accountType === "patient") {
+          const dob = document.getElementById("date_of_birth").value;
+          const gender = document.getElementById("gender").value;
+          const address = document.getElementById("address").value.trim();
+
+          if (dob && !isPastOrTodayDate(dob)) {
+            setFieldError("group-dob", true);
+            errors.push("Date of birth cannot be in the future.");
+          }
+
+          if (!gender) {
+            setFieldError("group-gender", true);
+            errors.push("Please select a gender.");
+          }
+
+          if (!address) {
+            setFieldError("group-address", true);
+            errors.push("Enter your address.");
+          }
+        } else {
+          const specialization =
+            document.getElementById("specialization").value;
+
+          if (!specialization) {
+            document
+              .getElementById("specialization")
+              .closest(".form-group")
+              .classList.add("invalid");
+            errors.push("Please select a specialization.");
+          } else {
+            document
+              .getElementById("specialization")
+              .closest(".form-group")
+              .classList.remove("invalid");
+          }
+        }
+
+        if (!isStrongPassword(password)) {
+          setFieldError("group-password", true);
+          errors.push(
+            "Password must be at least 6 characters and include a letter and a number.",
+          );
+        }
+
+        if (confirmPassword !== password) {
+          setFieldError("group-confirm-password", true);
+          errors.push("Passwords do not match.");
+        }
+
+        if (!termsChecked) {
+          document.getElementById("terms-error").style.display = "block";
+          errors.push("You must agree to the Terms & Conditions.");
+        }
+
+        if (errors.length > 0) {
+          showRegisterErrors(errors);
+          return false;
+        }
+
+        return true;
       }
+
+      /* --------------------------------
+         SHOW / CLEAR ERROR BANNER
+      -------------------------------- */
+
+      function showRegisterErrors(errors) {
+        const banner = document.getElementById("registerError");
+        const list = document.getElementById("registerErrorList");
+
+        list.innerHTML = "";
+
+        errors.forEach(function (message) {
+          const li = document.createElement("li");
+          li.textContent = message;
+          list.appendChild(li);
+        });
+
+        banner.style.display = "flex";
+        banner.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      function clearRegisterBanner() {
+        document.getElementById("registerError").style.display = "none";
+      }
+
+      /* --------------------------------
+         WIRE UP FORM
+      -------------------------------- */
+
+      document
+        .getElementById("registerForm")
+        .addEventListener("submit", function (event) {
+          if (!validateRegister()) {
+            event.preventDefault();
+          } else {
+            clearRegisterBanner();
+          }
+        });
+
+      document
+        .querySelectorAll("#registerForm input, #registerForm select")
+        .forEach(function (el) {
+          el.addEventListener("input", function () {
+            const group = el.closest(".form-group");
+            if (group) group.classList.remove("invalid");
+          });
+        });
+
+      window.addEventListener("DOMContentLoaded", function () {
+        changeAccountType();
+
+        // Server-side errors arrive as one "; "-joined string in the
+        // first <li>; split it into separate list items.
+        const list = document.getElementById("registerErrorList");
+        const first = list.querySelector("li");
+
+        if (first && first.textContent.trim()) {
+          const messages = first.textContent
+            .split(";")
+            .map(function (m) {
+              return m.trim();
+            })
+            .filter(Boolean);
+
+          list.innerHTML = "";
+
+          messages.forEach(function (message) {
+            const li = document.createElement("li");
+            li.textContent = message;
+            list.appendChild(li);
+          });
+        }
+      });
     </script>
   </body>
 </html>
-```

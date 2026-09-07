@@ -1,3 +1,4 @@
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -87,8 +88,8 @@
       }
 
       .doctor-icon {
-        width: 170px;
-        height: 170px;
+        width: 200px;
+        height: 200px;
 
         margin: 40px auto 0;
 
@@ -104,8 +105,8 @@
       }
 
       .doctor-icon img {
-        width: 200%;
-        height: 200%;
+        width: 150%;
+        height: 150%;
 
         object-fit: contain;
       }
@@ -146,6 +147,10 @@
       .login-error {
         display: none;
 
+        align-items: center;
+
+        gap: 10px;
+
         background: #ffe6e6;
 
         color: #c62828;
@@ -161,6 +166,10 @@
         font-size: 14px;
 
         font-weight: bold;
+      }
+
+      .login-error i {
+        font-size: 16px;
       }
 
       /* LABELS */
@@ -480,8 +489,14 @@
 
           <!-- ERROR MESSAGE -->
 
-          <div id="loginError" class="login-error"></div>
-
+          <div
+            id="loginError"
+            class="login-error"
+            style="display: {{error_display}};"
+          >
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <span>{{error}}</span>
+          </div>
           <!-- LOGIN FORM -->
 
           <form
@@ -626,9 +641,9 @@
       function showLoginError(message) {
         const errorBox = document.getElementById("loginError");
 
-        errorBox.textContent = message;
+        errorBox.querySelector("span").textContent = message;
 
-        errorBox.style.display = "block";
+        errorBox.style.display = "flex";
       }
 
       /* --------------------------------
@@ -644,6 +659,10 @@
           showLoginError(error);
         }
       });
+
+      /* --------------------------------
+   CLEAR ERROR WHEN USER TYPES
+-------------------------------- */
 
       document.getElementById("email").addEventListener("input", function () {
         document.getElementById("loginError").style.display = "none";

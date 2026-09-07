@@ -1,3 +1,4 @@
+
 from urllib.parse import quote_plus, parse_qs
 
 from template_engine import TemplateEngine
@@ -165,23 +166,39 @@ class LoginController:
 
         # -----------------------------
         # INVALID LOGIN
-        # -----------------------------
-
+        # -----------------------------'
+      
         connection.close()
-
+ 
         LoginController.redirect_error(
             request,
             "Invalid email or password."
         )
-
+ 
+        return
+ 
     @staticmethod
-    def redirect_error(request, message):
-
+    def redirect_error(request, error):
+ 
         request.send_response(302)
-
+ 
         request.send_header(
             "Location",
-            "/login?error=" + quote_plus(message)
+            f"/login?error={quote_plus(error)}"
         )
-
+ 
         request.end_headers()
+ 
+    @staticmethod
+    def show_error(request, error):
+ 
+        TemplateEngine.render(
+            request,
+            "login.html",
+            {
+                "title": "Login",
+                "error": error,
+                "error_display": "block"
+            }
+        )
+ 
