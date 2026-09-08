@@ -85,6 +85,21 @@ def create_tables():
             REFERENCES time_slot(slot_id)
         )
     """)
+    
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS doctor_bio(
+            bio_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            doctor_id INTEGER UNIQUE NOT NULL,
+            profile_image TEXT,
+            nmc_no TEXT UNIQUE NOT NULL,
+            experience INTEGER DEFAULT 0,
+            qualification TEXT,
+            location TEXT,
+            about TEXT,
+            consultation_fee REAL DEFAULT 0,
+            FOREIGN KEY (doctor_id) REFERENCES doctor(doctor_id)
+            )
+    """)
 
 
 
