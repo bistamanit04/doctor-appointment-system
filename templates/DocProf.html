@@ -6,7 +6,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Dr. Sarah Kim | Doctor Profile</title>
+    <title>{{title}}</title>
   </head>
 
   <body>
@@ -18,10 +18,10 @@
       <div class="profile-card">
         <!-- Header -->
         <div class="card-header">
-          <img class="avatar-img" src="/static/img/doctor.jpeg" alt="Dr. Sarah Kim" />
+          <img class="avatar-img" src="/static/img/doctor.jpeg" alt="doctor" />
           <div>
-            <h1 class="profile-name">Dr. Sarah Kim</h1>
-            <p class="profile-role">Dermatologist</p>
+            <h1 class="profile-name">{{name}}</h1>
+            <p class="profile-role">{{specialization}}</p>
             <span class="status-pill status-approved"
               ><i class="dot"></i>Approved</span
             >
@@ -34,15 +34,15 @@
 
           <div class="info-row">
             <span class="info-label">Specialization</span>
-            <span class="info-value">Dermatologist</span>
+            <span class="info-value">{{specialization}}</span>
           </div>
           <div class="info-row">
             <span class="info-label">Email</span>
-            <span class="info-value">sarah@email.com</span>
+            <span class="info-value">{{email}}</span>
           </div>
           <div class="info-row">
             <span class="info-label">Phone</span>
-            <span class="info-value">98XXXXXXXX</span>
+            <span class="info-value">{{phone}}</span>
           </div>
         </div>
 

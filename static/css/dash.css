@@ -17,7 +17,7 @@ body {
   padding: 0 20px;
 }
 
-/* ===== Navbar ===== */
+
 nav {
   display: flex;
   align-items: center;
@@ -95,7 +95,7 @@ nav {
   color: #fff;
 }
 
-/* ===== Hero / Carousel Section ===== */
+
 .carousel {
   position: relative;
 }

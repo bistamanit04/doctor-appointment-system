@@ -9,17 +9,11 @@ class TemplateEngine:
     @staticmethod
     def render(request, template_name, context=None):
 
-        # --------------------------------
-        # DEFAULT CONTEXT
-        # --------------------------------
-
         if context is None:
             context = {}
 
-
-        # --------------------------------
-        # GET TEMPLATE FILE
-        # --------------------------------
+    
+        # GET TEMPLAT
 
         file_path = os.path.join(
             TEMPLATE_DIR,
@@ -35,15 +29,14 @@ class TemplateEngine:
             html = file.read()
 
 
-        # --------------------------------
         # HANDLE FOR LOOPS
-        # Example:
         #
         # {% for doctor in doctors %}
         # {{doctor[0]}}
         # {{doctor[1]}}
+        # {{doctor[2]}}
         # {% endfor %}
-        # --------------------------------
+      
 
         loop_pattern = re.compile(
             r"{%\s*for\s+(\w+)\s+in\s+(\w+)\s*%}"
@@ -51,7 +44,6 @@ class TemplateEngine:
             r"{%\s*endfor\s*%}",
             re.DOTALL
         )
-
 
         def render_loop(match):
 
@@ -66,50 +58,46 @@ class TemplateEngine:
 
             result = ""
 
-
             for item in items:
 
                 current_html = loop_html
 
-
                 # --------------------------------
                 # HANDLE {{doctor[0]}}
                 # HANDLE {{doctor[1]}}
+                # HANDLE {{doctor[2]}}
                 # --------------------------------
 
-                index_pattern = re.compile(
-                    r"{{\s*"
-                    + re.escape(item_name)
-                    + r"\[(\d+)\]"
-                    r"\s*}}"
-                )
+                if isinstance(item, (list, tuple)):
 
-
-                def replace_index(index_match):
-
-                    index = int(
-                        index_match.group(1)
+                    index_pattern = re.compile(
+                        r"{{\s*"
+                        + re.escape(item_name)
+                        + r"\s*\[\s*(\d+)\s*\]"
+                        r"\s*}}"
                     )
 
-                    try:
-                        return str(
-                            item[index]
+                    def replace_index(index_match):
+
+                        index = int(
+                            index_match.group(1)
                         )
 
-                    except (IndexError, TypeError):
+                        if index < len(item):
+
+                            return str(
+                                item[index]
+                            )
 
                         return ""
 
+                    current_html = index_pattern.sub(
+                        replace_index,
+                        current_html
+                    )
 
-                current_html = index_pattern.sub(
-                    replace_index,
-                    current_html
-                )
-
-
-                # --------------------------------
                 # HANDLE {{doctor}}
-                # --------------------------------
+                
 
                 simple_item_pattern = re.compile(
                     r"{{\s*"
@@ -127,34 +115,25 @@ class TemplateEngine:
                         current_html
                     )
 
-
                 result += current_html
-
 
             return result
 
-
-        # Replace FOR loops first
-
+      
+        # PROCESS LOOPS
         html = loop_pattern.sub(
             render_loop,
             html
         )
 
-
-        # --------------------------------
-        # HANDLE NORMAL VARIABLES
-        #
-        # Example:
+        # NORMAL VARIABLES
         # {{title}}
         # {{error}}
-        # {{name}}
-        # --------------------------------
+   
 
         variable_pattern = re.compile(
             r"{{\s*(\w+)\s*}}"
         )
-
 
         def replace_variable(match):
 
@@ -165,7 +144,6 @@ class TemplateEngine:
                 ""
             )
 
-            # Lists/tuples are handled by loops
             if isinstance(
                 value,
                 (list, tuple)
@@ -173,20 +151,15 @@ class TemplateEngine:
 
                 return ""
 
-
             return str(value)
-
 
         html = variable_pattern.sub(
             replace_variable,
             html
         )
 
-
-        # --------------------------------
-        # SEND HTTP RESPONSE
-        # --------------------------------
-
+     
+        # SEND RESPONSE
         request.send_response(200)
 
         request.send_header(
@@ -199,4 +172,3 @@ class TemplateEngine:
         request.wfile.write(
             html.encode("utf-8")
         )
-

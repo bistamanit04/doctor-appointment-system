@@ -43,7 +43,7 @@
         </div>
       </nav>
 
-      <!-- ================= LEFT ARROW ================= -->
+     
 
       <button type="button" class="carousel-btn prev" id="prevBtn">
         &#10094;
@@ -74,27 +74,26 @@
               </div>
 
               <div class="right">
-                <img src="static/img/doctor.jpeg" alt="Doctor" />
+                <img src="static/img/doctor.jpeg" alt="Doctor " />
               </div>
             </div>
           </div>
 
           <!-- ================= SLIDE 2 ================= -->
 
+          {% for doctor in doctors %}
+
           <div class="slide profile-slide">
             <div class="profile-card">
               <div class="doctor-image">
-                <img src="static/img/doctor.jpeg" alt="Mike Lee" />
+                <img src="static/img/doctor.jpeg" alt="{{doctor[1]}}" />
               </div>
 
               <div class="doctor-info">
-                <span class="badge"> FEATURED DOCTOR </span>
+                <span class="badge"> RECENTLY JOINED  </span>
 
-                <h2>Mike Lee</h2>
-
-                <p class="place">3rd Place</p>
-
-                <h3>General Physician</h3>
+                <h2>{{doctor[1]}}</h2>
+                <h3>{{doctor[2]}}</h3>
 
                 <p class="description">
                   Experienced and trusted doctor providing quality healthcare
@@ -118,99 +117,12 @@
                   </div>
                 </div>
 
-                <button type="button" class="profileBtn">View Profile</button>
+                <a  href="/docprofile/{{doctor[0]}}" class="profileBtn" >View Profile </a>
               </div>
             </div>
+            
           </div>
-
-          <!-- ================= SLIDE 3 ================= -->
-
-          <div class="slide profile-slide">
-            <div class="profile-card">
-              <div class="doctor-image">
-                <img src="static/img/doctor.jpeg" alt="Sarah Wilson" />
-              </div>
-
-              <div class="doctor-info">
-                <span class="badge"> TOP SPECIALIST </span>
-
-                <h2>Sarah Wilson</h2>
-
-                <p class="place">2nd Place</p>
-
-                <h3>Cardiologist</h3>
-
-                <p class="description">
-                  Providing compassionate cardiac care with modern diagnostic
-                  and treatment options.
-                </p>
-
-                <div class="doctor-stats">
-                  <div>
-                    <strong>12+</strong>
-                    <span>Years Experience</span>
-                  </div>
-
-                  <div>
-                    <strong>700+</strong>
-                    <span>Patients</span>
-                  </div>
-
-                  <div>
-                    <strong>4.8</strong>
-                    <span>Rating</span>
-                  </div>
-                </div>
-
-                <button type="button" class="profileBtn">View Profile</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- ================= SLIDE 4 ================= -->
-
-          <div class="slide profile-slide">
-            <div class="profile-card">
-              <div class="doctor-image">
-                <img src="static/img/doctor.jpeg" alt="David Smith" />
-              </div>
-
-              <div class="doctor-info">
-                <span class="badge"> BEST DOCTOR </span>
-
-                <h2>David Smith</h2>
-
-                <p class="place">1st Place</p>
-
-                <h3>Neurologist</h3>
-
-                <p class="description">
-                  Dedicated to providing advanced neurological care with a
-                  patient-focused approach.
-                </p>
-
-                <div class="doctor-stats">
-                  <div>
-                    <strong>15+</strong>
-                    <span>Years Experience</span>
-                  </div>
-
-                  <div>
-                    <strong>900+</strong>
-                    <span>Patients</span>
-                  </div>
-
-                  <div>
-                    <strong>5.0</strong>
-                    <span>Rating</span>
-                  </div>
-                </div>
-
-                <button type="button" class="profileBtn">View Profile</button>
-              </div>
-            </div>
-          </div>
-        </div>
+          {% endfor %}
       </div>
 
       <!-- ================= RIGHT ARROW ================= -->
