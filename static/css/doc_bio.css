@@ -1,0 +1,236 @@
+/* ========================================================
+   Doctor Profile page — additions on top of style2.css
+   ======================================================== */
+
+.profile-page-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.profile-card {
+  width: 100%;
+  max-width: 640px;
+}
+
+/* ----- Banner ----- */
+.banner {
+  display: none;
+  padding: 12px 14px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.banner.error {
+  background: #fdeaea;
+  color: #e5484d;
+  border: 1px solid #f6b9b9;
+}
+
+.banner.success {
+  background: #e6f8ee;
+  color: #17a35a;
+  border: 1px solid #b3ecc9;
+}
+
+/* ----- Form rows ----- */
+.form-row {
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  gap: 18px;
+  align-items: start;
+  margin-bottom: 22px;
+}
+
+.form-row label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #444;
+  padding-top: 10px;
+}
+
+.form-input {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-input input,
+.form-input textarea {
+  border: 1px solid #e5e9f4;
+  background: #f7f9fc;
+  border-radius: 10px;
+  padding: 11px 14px;
+  font-size: 14px;
+  outline: none;
+  width: 100%;
+  font-family: inherit;
+}
+
+.form-input input:focus,
+.form-input textarea:focus {
+  border-color: #1a4fd6;
+  background: #fff;
+}
+
+.form-input textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.inline-unit {
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.inline-unit input {
+  flex: 1;
+}
+
+.unit {
+  font-size: 13px;
+  color: #888;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.unit-prefix {
+  order: -1;
+}
+
+.field-error {
+  color: #e5484d;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 6px;
+  display: none;
+}
+
+.field-hint {
+  font-size: 12px;
+  color: #999;
+  margin-top: 6px;
+}
+
+.form-row.invalid input,
+.form-row.invalid textarea {
+  border-color: #e5484d;
+}
+
+.form-row.invalid .field-error {
+  display: block;
+}
+
+.char-count {
+  font-size: 12px;
+  color: #aaa;
+  text-align: right;
+  margin-top: 4px;
+}
+
+/* ----- Profile picture uploader ----- */
+.pic-row .pic-uploader {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.pic-preview {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #eaf0ff;
+  background: #f7f9fc;
+}
+
+.choose-file-btn {
+  display: inline-block;
+  background: #eaf0ff;
+  color: #1a4fd6;
+  padding: 9px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.choose-file-btn:hover {
+  background: #1a4fd6;
+  color: #fff;
+}
+
+/* ----- Save button ----- */
+.save-btn {
+  display: block;
+  width: 100%;
+  background: #1a4fd6;
+  color: #fff;
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  margin-top: 8px;
+}
+
+.save-btn:hover {
+  opacity: 0.88;
+}
+
+.save-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ----- Toast (shared with availability page) ----- */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: #222;
+  color: #fff;
+  padding: 14px 24px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 999;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.toast.toast-success {
+  background: #17a35a;
+}
+
+.toast.toast-error {
+  background: #e5484d;
+}
+
+/* ----- Responsive ----- */
+@media (max-width: 600px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row label {
+    padding-top: 0;
+  }
+
+  .pic-row .pic-uploader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

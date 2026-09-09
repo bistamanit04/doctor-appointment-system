@@ -6,7 +6,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Doctor Dashboard | Doctor Appointment System</title>
+    <title>{{title}}</title>
   </head>
 
   <body>
@@ -15,7 +15,7 @@
       <!-- ===== Sidebar ===== -->
       <aside class="sidebar" id="sidebar">
         <div class="logo">
-          <img src="logo.png" alt="logo" />
+          <img src="{{profile_image}}" alt="logo" />
           <div>
             <h2>Doctor Appointment</h2>
             <p>System</p>
@@ -36,10 +36,7 @@
             <a href="#"><span class="icon">🗓️</span> Availability</a>
           </li>
           <li>
-            <a href="#"><span class="icon">💬</span> Messages</a>
-          </li>
-          <li>
-            <a href="#"><span class="icon">⚙️</span> Settings</a>
+            <a href="/doctor/profile"><span class="icon">💬</span> My profile</a>
           </li>
         </ul>
 
@@ -63,10 +60,10 @@
               <span class="dot"></span>
             </div>
             <div class="topbar-profile" onclick="window.location.href='doctor-profile.html'">
-              <img src="doctor.jpeg" alt="doctor avatar" />
+              <img src="{{profile_image}}" alt="doctor avatar" />
               <div>
                 <div class="name">{{name}}</div>
-                <div class="role">Dermatologist</div>
+                <div class="role">{{qualification}}</div>
               </div>
             </div>
           </div>

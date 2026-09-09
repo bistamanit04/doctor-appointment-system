@@ -36,10 +36,26 @@ class DoctorDashController:
 
         # Get doctor information
         cursor.execute("""
-            SELECT name, specialization, email, phone, status
-            FROM doctor
-            WHERE doctor_id = ?
-        """, (doctor_id,))
+                SELECT
+                doctor.name,
+                doctor.specialization,
+                doctor.email,
+                doctor.phone,
+                doctor.status,
+                doctor_bio.profile_image,
+                doctor_bio.nmc_no,
+                doctor_bio.experience,
+                doctor_bio.qualification,
+                doctor_bio.location,
+                doctor_bio.about,
+                doctor_bio.consultation_fee
+             FROM doctor
+             LEFT JOIN doctor_bio
+              ON doctor.doctor_id = doctor_bio.doctor_id
+             WHERE doctor.doctor_id = ?
+             """, (doctor_id,)
+        )
+        
 
         doctor = cursor.fetchone()
 
@@ -61,13 +77,21 @@ class DoctorDashController:
         TemplateEngine.render(
             request,
             "doctorDashboard.html",
-            {
-                "title": "Doctor Dashboard",
-                "doctor_id": doctor_id,
-                "name": doctor[0],
-                "specialization": doctor[1],
-                "email": doctor[2],
-                "phone": doctor[3],
-                "status": doctor[4]
-            }
-        )
+           {
+               "title": "Doctor Dashboard",
+               "doctor_id": doctor_id,
+               "name": doctor[0],
+               "specialization": doctor[1],
+               "email": doctor[2],
+               "phone": doctor[3],
+               "status": doctor[4],
+               
+               "profile_image": doctor[5] or "static/img/doctor.jpeg",
+               "nmc_no": doctor[6] or "",
+               "experience": doctor[7] or 0,
+               "qualification": doctor[8] or "",
+               "location": doctor[9] or "",
+               "about": doctor[10] or "",
+               "consultation_fee": doctor[11] or 0,
+               "doctor": doctor
+           })

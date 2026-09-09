@@ -3,18 +3,20 @@ from urllib.parse import parse_qs
 from template_engine import TemplateEngine
 from database import get_connection
 from session import get_session
+from models.doctor_model import DoctorModel
 
 
 class DoctorBioController:
 
+    
+    # GET /doctor/profile
+  
     @staticmethod
     def show(request):
 
-        # GET SESSION ID
-        cookie = request.headers.get(
-            "Cookie",
-            ""
-        )
+        # GET SESSION
+   
+        cookie = request.headers.get("Cookie", "")
 
         session_id = None
 
@@ -24,44 +26,34 @@ class DoctorBioController:
 
             if item.startswith("session_id="):
 
-                session_id = item.split(
-                    "=",
-                    1
-                )[1]
+                session_id = item.split("=", 1)[1]
 
                 break
 
+    
         # CHECK SESSION
-       
 
         session = get_session(session_id)
 
         if not session:
 
             request.send_response(302)
-
-            request.send_header(
-                "Location",
-                "/login"
-            )
-
+            request.send_header("Location", "/login")
             request.end_headers()
 
             return
 
-
-    
+     
         # CHECK DOCTOR
+  
 
         if session["user_type"] != "doctor":
 
             request.send_response(403)
-
             request.send_header(
                 "Content-Type",
-                "text/html"
+                "text/html; charset=utf-8"
             )
-
             request.end_headers()
 
             request.wfile.write(
@@ -70,62 +62,109 @@ class DoctorBioController:
 
             return
 
+  
+        # GET DOCTOR ID
+     
 
         doctor_id = session["user_id"]
 
-
-       
-        # GET EXISTING BIO
-
-        connection = get_connection()
-
-        cursor = connection.cursor()
-
-        cursor.execute(
-            """
-            SELECT
-                bio_id,
-                profile_image,
-                nmc_no,
-                experience,
-                qualification,
-                location,
-                about,
-                consultation_fee
-            FROM doctor_bio
-            WHERE doctor_id = ?
-            """,
-            (doctor_id,)
-        )
-
-        bio = cursor.fetchone()
-
-        connection.close()
-
-
+    
+        # GET DOCTOR + BIO
       
-        # SHOW FORM
+
+        doctor = DoctorModel.get_by_id(doctor_id)
+
+        if not doctor:
+
+            request.send_response(404)
+            request.send_header(
+                "Content-Type",
+                "text/html; charset=utf-8"
+            )
+            request.end_headers()
+
+            request.wfile.write(
+                b"<h1>Doctor not found</h1>"
+            )
+
+            return
+
+        # ------------------------------------------------------
+        # DOCTOR DATA
+        #
+        # 0  doctor_id
+        # 1  name
+        # 2  email
+        # 3  phone
+        # 4  specialization
+        #
+        # 5  bio_id
+        # 6  profile_image
+        # 7  nmc_no
+        # 8  experience
+        # 9  qualification
+        # 10 location
+        # 11 about
+        # 12 consultation_fee
+        # ------------------------------------------------------
 
         TemplateEngine.render(
             request,
             "doctor_bio.html",
             {
                 "title": "Doctor Profile",
-                "bio": bio
+
+                "name": doctor[1],
+
+                "specialization": doctor[4],
+
+                "profile_image":
+                    doctor[6]
+                    or "static/img/doctor.jpeg",
+
+                "nmc_no":
+                    doctor[7]
+                    or "",
+
+                "experience":
+                    doctor[8]
+                    if doctor[8] is not None
+                    else 0,
+
+                "qualification":
+                    doctor[9]
+                    or "",
+
+                "location":
+                    doctor[10]
+                    or "",
+
+                "about":
+                    doctor[11]
+                    or "",
+
+                "consultation_fee":
+                    doctor[12]
+                    if doctor[12] is not None
+                    else 0,
+
+                "error": "",
+
+                "error_display": "none"
             }
         )
 
 
+
+    # POST /doctor/profile/save
+ 
+
     @staticmethod
     def save(request):
 
-  
         # GET SESSION
 
-        cookie = request.headers.get(
-            "Cookie",
-            ""
-        )
+        cookie = request.headers.get("Cookie", "")
 
         session_id = None
 
@@ -142,39 +181,31 @@ class DoctorBioController:
 
                 break
 
+        # CHECK SESSION
 
         session = get_session(session_id)
-
-
-  
-        # CHECK SESSION
 
         if not session:
 
             request.send_response(302)
-
             request.send_header(
                 "Location",
                 "/login"
             )
-
             request.end_headers()
 
             return
 
-
-      
         # CHECK DOCTOR
+  
 
         if session["user_type"] != "doctor":
 
             request.send_response(403)
-
             request.send_header(
                 "Content-Type",
-                "text/html"
+                "text/html; charset=utf-8"
             )
-
             request.end_headers()
 
             request.wfile.write(
@@ -183,12 +214,10 @@ class DoctorBioController:
 
             return
 
-
         doctor_id = session["user_id"]
 
-
+        # READ FORM DATA
      
-        # READ FORM
 
         content_length = int(
             request.headers.get(
@@ -205,6 +234,9 @@ class DoctorBioController:
             data.decode("utf-8")
         )
 
+      
+        # GET FORM VALUES
+   
 
         nmc_no = form_data.get(
             "nmc_no",
@@ -236,33 +268,33 @@ class DoctorBioController:
             ["0"]
         )[0].strip()
 
-
-      
+       
         # BASIC VALIDATION
+  
 
         if not nmc_no:
 
-            TemplateEngine.render(
-                request,
-                "doctor_bio.html",
-                {
-                    "title": "Doctor Profile",
-                    "error": "NMC number is required."
-                }
+            request.send_response(302)
+
+            request.send_header(
+                "Location",
+                "/doctor/profile?error=NMC+number+is+required"
             )
+
+            request.end_headers()
 
             return
 
-
+      
+        # DATABASE
     
-        # SAVE BIO
 
         connection = get_connection()
 
         cursor = connection.cursor()
 
-
-        # Check whether bio already exists
+        # CHECK BIO
+  
 
         cursor.execute(
             """
@@ -275,10 +307,10 @@ class DoctorBioController:
 
         existing_bio = cursor.fetchone()
 
-
+    
+        # UPDATE
+        
         if existing_bio:
-
-            # UPDATE
 
             cursor.execute(
                 """
@@ -303,9 +335,11 @@ class DoctorBioController:
                 )
             )
 
-        else:
+      
+        # INSERT
+  
 
-            # INSERT
+        else:
 
             cursor.execute(
                 """
@@ -331,13 +365,13 @@ class DoctorBioController:
                 )
             )
 
-
         connection.commit()
 
         connection.close()
 
-
-        # REDIRECT TO DOCTOR DASHBOARD
+      
+        # REDIRECT
+     
 
         request.send_response(302)
 

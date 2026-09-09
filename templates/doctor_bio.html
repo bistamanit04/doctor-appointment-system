@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="/static/css/doc_bio.css" />
+    <link rel="stylesheet" href="/static/css/dash.css" />
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{{title}}</title>
+  </head>
+
+  <body>
+    <script src="/static/js/doc_bio.js" defer></script>
+
+    <div class="dashboard-wrapper">
+      <!-- ===== Sidebar ===== -->
+      <aside class="sidebar" id="sidebar">
+        <div class="logo">
+          <img src="logo.png" alt="logo" />
+          <div>
+            <h2>Doctor Appointment</h2>
+            <p>System</p>
+          </div>
+        </div>
+
+        <ul class="sidebar-nav">
+          <li>
+              <a href="/doctor/dashboard"
+              ><span class="icon">🏠</span> Dashboard</a
+            >
+          </li>
+          <li>
+            <a href="#"><span class="icon">📅</span> Appointments</a>
+          </li>
+          <li>
+            <a href="#"><span class="icon">🧑‍🤝‍🧑</span> My Patients</a>
+          </li>
+          <li>
+            <a href="doctor-availability.html"
+              ><span class="icon">🗓️</span> Availability</a
+            >
+          </li>
+          <li>
+            <a href="#"><span class="icon">💬</span> Messages</a>
+          </li>
+          <li class="active">
+            <a href="doctor-profile.html"
+              ><span class="icon">⚙️</span> Settings</a
+            >
+          </li>
+        </ul>
+
+        <div class="sidebar-footer">
+          <a href="index.html"><span class="icon">↩️</span> Log Out</a>
+        </div>
+      </aside>
+
+      <!-- ===== Main ===== -->
+      <div class="dashboard-main">
+        <header class="dashboard-topbar">
+          <button class="menu-toggle" id="menuToggle">&#9776;</button>
+
+          <div class="topbar-search">
+            <input type="text" placeholder="Search patients, appointments..." />
+          </div>
+
+          <div class="topbar-right">
+            <div class="topbar-icon">
+              🔔
+              <span class="dot"></span>
+            </div>
+            <div
+              class="topbar-profile"
+              onclick="window.location.href = 'doctor-profile.html'"
+            >
+              <img
+                src="{{profile_image}}"
+                alt="doctor avatar"
+                onerror="this.src = 'doctor.jpeg'"
+              />
+              <div>
+                <div class="name">Dr. {{name}}</div>
+                <div class="role">{{qualification}}</div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <div class="dashboard-content">
+          <div class="profile-page-wrap">
+            <div class="panel profile-card">
+              <div class="panel-header">
+                <h2>Complete Your Profile<style ;></style></h2>
+              </div>
+
+              <div
+                id="profileBanner"
+                class="banner error"
+                style="display: {{error_display}};"
+              >
+                <span id="profileBannerText">{{error}}</span>
+              </div>
+
+              <form
+                id="profileForm"
+                method="POST"
+                action="/doctor/profile/save"
+                enctype="multipart/form-data"
+                novalidate
+              >
+                <!-- PROFILE PICTURE -->
+                <div class="form-row pic-row">
+                  <label>Profile Picture</label>
+
+                  <div class="pic-uploader">
+                    <img
+                      id="picPreview"
+                      class="pic-preview"
+                      src="{{profile_image}}"
+                      onerror="this.src = 'doctor.jpeg'"
+                      alt="Profile preview"
+                    />
+
+                    <div>
+                      <label for="profile_image" class="choose-file-btn">
+                        Choose File
+                      </label>
+                      <input
+                        type="file"
+                        id="profile_image"
+                        name="profile_image"
+                        accept="image/png, image/jpeg, image/webp"
+                        hidden
+                      />
+                      <p class="field-hint">JPG, PNG or WEBP. Max 2MB.</p>
+                      <span class="field-error" id="err-image"></span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- NMC REGISTRATION NO -->
+                <div class="form-row" id="group-nmc">
+                  <label for="nmc_no">NMC Registration No.</label>
+                  <div class="form-input">
+                    <input
+                      type="text"
+                      id="nmc_no"
+                      name="nmc_no"
+                      placeholder="e.g. NMC-12345"
+                      value="{{nmc_no}}"
+                      required
+                    />
+                    <span class="field-error"
+                      >Enter your NMC registration number.</span
+                    >
+                  </div>
+                </div>
+
+                <!-- EXPERIENCE -->
+                <div class="form-row" id="group-experience">
+                  <label for="experience">Experience</label>
+                  <div class="form-input inline-unit">
+                    <input
+                      type="number"
+                      id="experience"
+                      name="experience"
+                      min="0"
+                      max="70"
+                      value="{{experience}}"
+                      required
+                    />
+                    <span class="unit">Years</span>
+                    <span class="field-error"
+                      >Enter a valid number of years (0-70).</span
+                    >
+                  </div>
+                </div>
+
+                <!-- QUALIFICATION -->
+                <div class="form-row" id="group-qualification">
+                  <label for="qualification">Qualification</label>
+                  <div class="form-input">
+                    <input
+                      type="text"
+                      id="qualification"
+                      name="qualification"
+                      placeholder="e.g. MBBS, MD (Cardiology)"
+                      value="{{qualification}}"
+                      required
+                    />
+                    <span class="field-error">Enter your qualification.</span>
+                  </div>
+                </div>
+
+                <!-- LOCATION -->
+                <div class="form-row" id="group-location">
+                  <label for="location">Location</label>
+                  <div class="form-input">
+                    <input
+                      type="text"
+                      id="location"
+                      name="location"
+                      placeholder="e.g. Kathmandu, Nepal"
+                      value="{{location}}"
+                      required
+                    />
+                    <span class="field-error"
+                      >Enter your practice location.</span
+                    >
+                  </div>
+                </div>
+
+                <!-- CONSULTATION FEE -->
+                <div class="form-row" id="group-fee">
+                  <label for="consultation_fee">Consultation Fee</label>
+                  <div class="form-input inline-unit">
+                    <span class="unit unit-prefix">Rs.</span>
+                    <input
+                      type="number"
+                      id="consultation_fee"
+                      name="consultation_fee"
+                      min="0"
+                      step="0.01"
+                      value="{{consultation_fee}}"
+                      required
+                    />
+                    <span class="field-error"
+                      >Enter a valid consultation fee.</span
+                    >
+                  </div>
+                </div>
+
+                <!-- ABOUT -->
+                <div class="form-row about-row" id="group-about">
+                  <label for="about">About You</label>
+                  <div class="form-input">
+                    <textarea
+                      id="about"
+                      name="about"
+                      rows="4"
+                      maxlength="500"
+                      placeholder="Tell patients a little about your background and approach to care..."
+                    >{{about}}</textarea>
+                    <div class="char-count">
+                      <span id="aboutCount">0</span>/500
+                    </div>
+                  </div>
+                </div>
+
+                <button type="submit" class="save-btn" id="saveProfileBtn">
+                  Save Profile
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast">
+      <span id="toastMsg"></span>
+    </div>
+  </body>
+</html>
