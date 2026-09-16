@@ -51,10 +51,8 @@ class RegisterController:
         confirm_password = form_data.get("confirm_password", [""])[0]
         terms = form_data.get("terms", [""])[0]
 
-        # -----------------------------
+      
         # VALIDATION
-        # -----------------------------
-
         errors = []
 
         if account not in ("patient", "doctor"):
@@ -111,10 +109,7 @@ class RegisterController:
         connection = get_connection()
         cursor = connection.cursor()
 
-        # -----------------------------
         # UNIQUENESS CHECK (across both tables)
-        # -----------------------------
-
         cursor.execute(
             "SELECT 1 FROM patient WHERE email = ? UNION SELECT 1 FROM doctor WHERE email = ?",
             (email, email)

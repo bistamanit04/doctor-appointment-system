@@ -47,10 +47,8 @@ class LoginController:
             [""]
         )[0]
 
-        # -----------------------------
+       
         # BASIC VALIDATION
-        # -----------------------------
-
         if not email:
 
             LoginController.redirect_error(
@@ -76,10 +74,8 @@ class LoginController:
         connection = get_connection()
         cursor = connection.cursor()
 
-        # -----------------------------
+        
         # CHECK PATIENT
-        # -----------------------------
-
         cursor.execute(
             """
             SELECT patient_id, name
@@ -120,10 +116,8 @@ class LoginController:
 
             return
 
-        # -----------------------------
+     
         # CHECK DOCTOR
-        # -----------------------------
-
         cursor.execute(
             """
             SELECT doctor_id, name, status
@@ -164,10 +158,8 @@ class LoginController:
 
             return
 
-        # -----------------------------
+   
         # INVALID LOGIN
-        # -----------------------------'
-      
         connection.close()
  
         LoginController.redirect_error(
@@ -191,7 +183,6 @@ class LoginController:
  
     @staticmethod
     def show_error(request, error):
- 
         TemplateEngine.render(
             request,
             "login.html",
