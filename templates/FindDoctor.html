@@ -6,7 +6,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>{{tite}}</title>
+    <title>{{title}}</title>
   </head>
 
   <body>
@@ -58,20 +58,23 @@
         <div
           class="doctor-card"
           data-specialty="{{doctor[2]}}"
-          data-name="{{doctor[1]}}"
+          data-name="{{doctors[1]}}"
         >
           <div class="doctor-card-top">
-            <img src="/static/img/doctor.jpeg" alt="{{doctor[1]}}" />
+            <img src="{{doctor[6]}}" alt="{{doctor[6]}}" />
             <div class="doctor-card-badge status-available">
               Available Today
             </div>
           </div>
           <h3>"{{doctor[1]}}"</h3>
           <span class="tag-pill">{{doctor[2]}}</span>
-          <div class="rating-line">★★★★★ <span>4.9 (312)</span></div>
+          <div class="rating-line">NMC NO: {{doctor[7]}}</span></div>
           <div class="meta-line">
-            <span>🎓 9 yrs experience</span>
-            <span>📍 Patan</span>
+          <ul>
+            <li> {{doctor[8]}} yrs experience</li>
+            <li> location : {{doctor[10]}}</li>
+            <li> Consultation fee: {{doctor[12]}} </li>
+          </ul> 
           </div>
           <div class="slots-label">Next Available</div>
           <div class="slots-row">
