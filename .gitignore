@@ -8,3 +8,7 @@ doctor.db
 
 # Logs
 *.log
+
+static/uploads/doctors/*.jpg
+static/uploads/doctors/*.jpeg
+static/uploads/doctors/*.png

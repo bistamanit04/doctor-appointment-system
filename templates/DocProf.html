@@ -18,7 +18,7 @@
       <div class="profile-card">
         <!-- Header -->
         <div class="card-header">
-          <img class="avatar-img" src="/static/img/doctor.jpeg" alt="doctor" />
+          <img class="avatar-img" src="{{profile_image}}" alt="doctor" />
           <div>
             <h1 class="profile-name">{{name}}</h1>
             <p class="profile-role">{{specialization}}</p>
@@ -33,6 +33,11 @@
           <h2 class="section-title">Professional Information</h2>
 
           <div class="info-row">
+            <span class="info-label">NMC no</span>
+            <span class="info-value">{{nmc_no}}</span>
+          </div>
+
+          <div class="info-row">
             <span class="info-label">Specialization</span>
             <span class="info-value">{{specialization}}</span>
           </div>
@@ -44,7 +49,31 @@
             <span class="info-label">Phone</span>
             <span class="info-value">{{phone}}</span>
           </div>
+
+          <div class="info-row">
+            <span class="info-label">years of experience</span>
+            <span class="info-value">{{experience}}</span>
+          </div>
+
+          <div class="info-row">
+            <span class="info-label">Qualification</span>
+            <span class="info-value">{{qualification}}</span>
+          </div>
+
+        <div class="info-row">
+          <span class="info-label">location</span>
+          <span class="info-value">{{location}}</span>
         </div>
+
+        <div class="info-row">
+          <span class="info-label">About</span>
+          <span class="info-value">{{about}}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Consultaion fee</span>
+          <span class="info-value">{{consultaion}}</span>
+        </div>
+      </div>
 
         <!-- Appointment Information -->
         <div class="card-section">
