@@ -1,3 +1,4 @@
+
 from controllers.home_controller import HomeController
 from controllers.static_controller import StaticController
 from controllers.register_controller import RegisterController
@@ -23,25 +24,49 @@ class Router:
         query = parse_qs(parsed.query)
         request.query = query
 
-        print("REQUEST PATH:", path, "| QUERY:", query)
-
         if path.startswith("/static/"):
             StaticController.serve(request)
             return
 
+        # Dynamic admin doctor profile
+        if path.startswith("/admin/doctor/"):
+
+            doctor_id = path.replace(
+                "/admin/doctor/",
+                "",
+                1
+            )
+
+            if doctor_id.isdigit():
+
+                AdminDoctorController.profile(
+                    request,
+                    int(doctor_id)
+                )
+
+                return
+
+            Router.not_found(request)
+            return
+
         # Dynamic doctor profile
         if path.startswith("/docprofile/"):
+
             doctor_id = path.replace(
                 "/docprofile/",
                 "",
                 1
             )
+
             if doctor_id.isdigit():
+
                 DocProfile.profile(
                     request,
                     int(doctor_id)
                 )
+
                 return
+
             Router.not_found(request)
             return
 
@@ -52,10 +77,9 @@ class Router:
             "/patient/dashboard": patientController.dashboard,
             "/doctor/dashboard": DoctorDashController.dashboard,
             "/doctors": DoctorController.DOClist,
-            "/doctor/profile":DoctorBioController.show,
-            "/admin/login":AdminLoginController.show,
-            "/admin/dashboard":AdminDashboardController.dashboard,
-            
+            "/doctor/profile": DoctorBioController.show,
+            "/admin/login": AdminLoginController.show,
+            "/admin/dashboard": AdminDashboardController.dashboard,
         }
 
         handler = routes.get(path)
@@ -76,11 +100,10 @@ class Router:
         routes = {
             "/register": RegisterController.register,
             "/login": LoginController.login,
-            "/doctor/profile/save":DoctorBioController.save,
-            "/admin/login":AdminLoginController.login,
-            "/admin/doctor/certify":AdminDoctorController.certify,
-            "/admin/doctor/reject":AdminDoctorController.reject,
-            
+            "/doctor/profile/save": DoctorBioController.save,
+            "/admin/login": AdminLoginController.login,
+            "/admin/doctor/certify": AdminDoctorController.certify,
+            "/admin/doctor/reject": AdminDoctorController.reject,
         }
 
         handler = routes.get(path)
@@ -92,8 +115,16 @@ class Router:
 
     @staticmethod
     def not_found(request):
+
         request.send_response(404)
-        request.send_header("content-type", "text/html")
+
+        request.send_header(
+            "content-type",
+            "text/html"
+        )
+
         request.end_headers()
 
-        request.wfile.write(b"<h1> 404 page not found</h1>")
+        request.wfile.write(
+            b"<h1>404 page not found</h1>"
+        )
