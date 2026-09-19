@@ -8,6 +8,7 @@ from controllers.FindDoctor_controller import DoctorController
 from controllers.DocProfile_controller import DocProfile
 from urllib.parse import urlparse, parse_qs
 from controllers.docbio_controller import DoctorBioController
+from controllers.adminLogin_controller import AdminLoginController
 
 
 class Router:
@@ -50,6 +51,7 @@ class Router:
             "/doctor/dashboard": DoctorDashController.dashboard,
             "/doctors": DoctorController.DOClist,
             "/doctor/profile":DoctorBioController.show,
+            "/admin/login":AdminLoginController.show,
             
         }
 
@@ -72,6 +74,7 @@ class Router:
             "/register": RegisterController.register,
             "/login": LoginController.login,
             "/doctor/profile/save":DoctorBioController.save,
+            "/admin/login":AdminLoginController.login,
         }
 
         handler = routes.get(path)

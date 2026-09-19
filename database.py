@@ -16,6 +16,26 @@ def hash_password(password):
         b"doctor_appointment_salt",
         100000
     ).hex()
+    
+
+def create_admin(name, email, password):
+
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    hashed_password = hash_password(password)
+
+    cursor.execute("""
+        INSERT INTO admin (name, email, password)
+        VALUES (?, ?, ?)
+    """, (
+        name,
+        email,
+        hashed_password
+    ))
+
+    connection.commit()
+    connection.close()
 
 
 
@@ -99,6 +119,16 @@ def create_tables():
             consultation_fee REAL DEFAULT 0,
             FOREIGN KEY (doctor_id) REFERENCES doctor(doctor_id)
             )
+    """)
+    
+    # Admin table
+    cursor.execute("""
+         CREATE TABLE IF NOT EXISTS admin (
+         admin_id INTEGER PRIMARY KEY AUTOINCREMENT,
+         name TEXT NOT NULL,
+         email TEXT NOT NULL UNIQUE,
+         password TEXT NOT NULL
+         )
     """)
 
 
