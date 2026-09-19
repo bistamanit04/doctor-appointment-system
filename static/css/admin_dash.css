@@ -1,0 +1,141 @@
+.admin-stats {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+/* ----- Section divider ----- */
+.section-divider {
+    border-top: 1px solid #e5e9f4;
+    margin: 10px 0 22px;
+    padding-top: 24px;
+}
+
+.section-divider h2 {
+    font-size: 18px;
+    color: #111;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ----- Action buttons (shared by <a> and <button>) ----- */
+a.action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.admin-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.admin-actions form {
+    display: flex;
+    gap: 8px;
+}
+
+.certify-btn {
+    background: #e6f8ee;
+    color: #17a35a;
+}
+
+.certify-btn:hover {
+    background: #17a35a;
+    color: #fff;
+}
+
+.reject-btn {
+    background: #fdeaea;
+    color: #e5484d;
+}
+
+.reject-btn:hover {
+    background: #e5484d;
+    color: #fff;
+}
+
+.action-btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+/* Welcome-banner button is rendered as <a class="action-btn"> here,
+   so it needs to look like the existing .welcome-banner button */
+.welcome-banner .action-btn {
+    background: #fff;
+    color: #1a4fd6;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.welcome-banner .action-btn:hover {
+    opacity: 0.88;
+    color: #1a4fd6;
+}
+
+/* ----- Empty states ----- */
+.no-rows {
+    display: none;
+    text-align: center;
+    color: #999;
+    font-size: 14px;
+    padding: 30px 0;
+}
+
+/* ----- Responsive: stack the admin tables on small screens ----- */
+@media (max-width: 900px) {
+    .admin-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 700px) {
+    .admin-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-table thead {
+        display: none;
+    }
+
+    .admin-table,
+    .admin-table tbody,
+    .admin-table tr,
+    .admin-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .admin-table tr {
+        border: 1px solid #eef1f8;
+        border-radius: 12px;
+        margin-bottom: 14px;
+        padding: 12px 14px;
+    }
+
+    .admin-table td {
+        border-bottom: none;
+        padding: 6px 0;
+    }
+
+    .admin-table td[data-label]::before {
+        content: attr(data-label);
+        display: inline-block;
+        width: 110px;
+        font-size: 12px;
+        font-weight: 700;
+        color: #999;
+    }
+
+    .admin-actions {
+        flex-wrap: wrap;
+    }
+
+    .admin-actions form {
+        flex-wrap: wrap;
+    }
+}

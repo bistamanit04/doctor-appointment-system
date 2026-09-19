@@ -1,0 +1,536 @@
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="/static/css/dash.css" />
+    <link rel="stylesheet" href="/static/css/admin_dash.css" />
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{{title}}</title>
+  </head>
+
+  <body>
+    <script src="/static/js/admin_dash.js" defer></script>
+
+    <div class="dashboard-wrapper">
+      <!-- SIDEBAR-->
+
+      <aside class="sidebar" id="sidebar">
+        <div class="logo">
+          <img src="/static/img/logo.png" alt="logo" />
+
+          <div>
+            <h2>MedCare</h2>
+            <p>Admin Panel</p>
+          </div>
+        </div>
+
+        <ul class="sidebar-nav">
+          <li class="active">
+            <a href="/admin/dashboard">
+              <span class="icon">🏠</span>
+              Dashboard
+            </a>
+          </li>
+
+          <li>
+            <a href="/admin/doctors">
+              <span class="icon">👨‍⚕️</span>
+              All Doctors
+            </a>
+          </li>
+
+          <li>
+            <a href="/admin/doctors?status=pending">
+              <span class="icon">⏳</span>
+              Pending Approval
+            </a>
+          </li>
+
+          <li>
+            <a href="/admin/appointments">
+              <span class="icon">📅</span>
+              Appointments
+            </a>
+          </li>
+        </ul>
+
+        <div class="sidebar-footer">
+          <a href="/admin/logout">
+            <span class="icon">↩️</span>
+            Log Out
+          </a>
+        </div>
+      </aside>
+
+      <!-- MAIN DASHBOAR-->
+
+      <div class="dashboard-main">
+        <!-- TOP BAR-->
+
+        <header class="dashboard-topbar">
+          <button class="menu-toggle" id="menuToggle">&#9776;</button>
+
+          <div class="topbar-search">
+            <input
+              type="text"
+              id="doctorSearch"
+              placeholder="Search doctors by name, specialization, or NMC no..."
+            />
+          </div>
+
+          <div class="topbar-right">
+            <div class="topbar-icon">
+              🔔
+
+              <span class="dot" id="notifDot"></span>
+            </div>
+
+            <div class="topbar-profile">
+              <img src="/static/img/logo.png" alt="admin avatar" />
+
+              <div>
+                <div class="name">{{admin_name}}</div>
+
+                <div class="role">Administrator</div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- DASHBOARD CONTENT-->
+
+        <div class="dashboard-content">
+          <!-- WELCOME BANNER -->
+
+          <div class="welcome-banner">
+            <div>
+              <h1>Admin Dashboard</h1>
+
+              <p>
+                Welcome back, {{admin_name}}. Review and certify doctor
+                registrations to keep the platform trustworthy.
+              </p>
+            </div>
+
+            <a href="/admin/doctors?status=pending" class="action-btn">
+              Review Pending
+            </a>
+          </div>
+
+          <!--STATISTICS -->
+
+          <div class="dash-stats admin-stats">
+            <!-- TOTAL DOCTORS -->
+
+            <div class="dash-stat-card">
+              <div class="dash-stat-icon icon-blue">👨‍⚕️</div>
+
+              <div>
+                <h3>{{total_doctors}}</h3>
+
+                <p>Total Doctors</p>
+              </div>
+            </div>
+
+            <!-- PENDING DOCTORS -->
+
+            <div class="dash-stat-card">
+              <div class="dash-stat-icon icon-orange">⏳</div>
+
+              <div>
+                <h3>{{pending_doctors}}</h3>
+
+                <p>Pending Doctors</p>
+              </div>
+            </div>
+
+            <!-- CERTIFIED DOCTORS -->
+
+            <div class="dash-stat-card">
+              <div class="dash-stat-icon icon-green">✓</div>
+
+              <div>
+                <h3>{{certified_doctors}}</h3>
+
+                <p>Certified Doctors</p>
+              </div>
+            </div>
+
+            <!-- REJECTED DOCTORS -->
+
+            <div class="dash-stat-card">
+              <div class="dash-stat-icon icon-red">✕</div>
+
+              <div>
+                <h3>{{rejected_doctors}}</h3>
+
+                <p>Rejected Doctors</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION DIVIDER-->
+
+          <div class="section-divider">
+            <h2>Doctor Verification</h2>
+          </div>
+
+          <!--DASHBOARD GRID= -->
+
+          <div class="dash-grid">
+            <!-- =MAIN COLUMN -->
+
+            <div>
+              <!--PENDING DOCTORS-->
+
+              <div class="panel">
+                <div class="panel-header">
+                  <h2>Pending Doctors</h2>
+
+                  <a href="/admin/doctors?status=pending"> View All → </a>
+                </div>
+
+                <table class="data-table admin-table" id="pendingTable">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Specialization</th>
+                      <th>NMC No.</th>
+                      <th>Registered</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+
+                  <tbody id="pendingTableBody">
+                    {% for doc in pending_list %}
+
+                    <tr data-doctor-id="{{doc[0]}}">
+                      <!-- DOCTOR NAME -->
+
+                      <td data-label="Name">
+                        <div class="table-person">
+                          <img
+                            src="{{doc[5]}}"
+                            onerror="this.src = '/static/img/doctor.jpeg'"
+                            alt=""
+                          />
+
+                          Dr. {{doc[1]}}
+                        </div>
+                      </td>
+
+                      <!-- SPECIALIZATION -->
+
+                      <td data-label="Specialization">{{doc[2]}}</td>
+
+                      <!-- NMC -->
+
+                      <td data-label="NMC No.">{{doc[5]}}</td>
+
+                      <!-- REGISTERED -->
+
+                      <td data-label="Registered">{{doc[4]}}</td>
+
+                      <!-- ACTION -->
+
+                      <td data-label="Action">
+                        <div class="admin-actions">
+                          <!-- VIEW -->
+
+                          <a
+                            class="action-btn view-doc-btn"
+                            href="/admin/doctor/{{doc[0]}}"
+                          >
+                            View
+                          </a>
+
+                          <!-- CERTIFY -->
+
+                          <form method="POST" action="/admin/doctor/certify">
+                            <input
+                              type="hidden"
+                              name="doctor_id"
+                              value="{{doc[0]}}"
+                            />
+
+                            <button
+                              class="action-btn certify-btn"
+                              type="submit"
+                            >
+                              ✓ Certify
+                            </button>
+                          </form>
+
+                          <!-- REJECT -->
+
+                          <form method="POST" action="/admin/doctor/reject">
+                            <input
+                              type="hidden"
+                              name="doctor_id"
+                              value="{{doc[0]}}"
+                            />
+
+                            <button type="submit" class="reject-btn">
+                              Reject
+                            </button>
+                          </form>
+                        </div>
+                      </td>
+                    </tr>
+
+                    {% endfor %}
+                  </tbody>
+                </table>
+
+                <!-- EMPTY STATE -->
+
+                <p class="no-rows" id="noPending">
+                  No doctors awaiting verification 🎉
+                </p>
+              </div>
+
+              <!--  RECENTLY REJECTED-->
+
+              <div class="panel">
+                <div class="panel-header">
+                  <h2>Recently Rejected</h2>
+
+                  <a href="/admin/doctors?status=rejected"> View All → </a>
+                </div>
+
+                <table class="data-table admin-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Specialization</th>
+                      <th>NMC No.</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    {% for doc in rejected_list %}
+
+                    <tr data-doctor-id="{{doc[0]}}">
+                      <!-- DOCTOR -->
+
+                      <td data-label="Name">
+                        <div class="table-person">
+                          <img
+                            src="{{doc[5]}}"
+                            onerror="this.src = '/static/img/doctor.jpeg'"
+                            alt=""
+                          />
+
+                          Dr. {{doc[1]}}
+                        </div>
+                      </td>
+
+                      <!-- SPECIALIZATION -->
+
+                      <td data-label="Specialization">{{doc[2]}}</td>
+
+                      <!-- NMC -->
+
+                      <td data-label="NMC No.">{{doc[3]}}</td>
+
+                      <!-- STATUS -->
+
+                      <td data-label="Status">
+                        <span class="status-badge status-rejected">
+                          Rejected
+                        </span>
+                      </td>
+
+                      <!-- ACTION -->
+
+                      <td data-label="Action">
+                        <a
+                          class="action-btn view-doc-btn"
+                          href="/admin/doctor/{{doc[0]}}"
+                        >
+                          View
+                        </a>
+                      </td>
+                    </tr>
+
+                    {% endfor %}
+                  </tbody>
+                </table>
+
+                <!-- EMPTY STATE -->
+
+                <p class="no-rows" id="noRejected">No rejected doctors.</p>
+              </div>
+
+              <!-- RECENTLY CERTIFIED-->
+
+              <div class="panel">
+                <div class="panel-header">
+                  <h2>Recently Certified</h2>
+
+                  <a href="/admin/doctors?status=certified"> View All → </a>
+                </div>
+
+                <table class="data-table admin-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Specialization</th>
+                      <th>NMC No.</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    {% for doc in certified_list %}
+
+                    <tr data-doctor-id="{{doc[0]}}">
+                      <!-- DOCTOR -->
+
+                      <td data-label="Name">
+                        <div class="table-person">
+                          <img
+                            src="{{doc[5]}}"
+                            onerror="this.src = '/static/img/doctor.jpeg'"
+                            alt=""
+                          />
+
+                          Dr. {{doc[1]}}
+                        </div>
+                      </td>
+
+                      <!-- SPECIALIZATION -->
+
+                      <td data-label="Specialization">{{doc[2]}}</td>
+
+                      <!-- NMC -->
+
+                      <td data-label="NMC No.">{{doc[3]}}</td>
+
+                      <!-- STATUS -->
+
+                      <td data-label="Status">
+                        <span class="status-badge status-completed">
+                          Certified
+                        </span>
+                      </td>
+
+                      <!-- ACTION -->
+
+                      <td data-label="Action">
+                        <a
+                          class="action-btn view-doc-btn"
+                          href="/admin/doctor/{{doc[0]}}"
+                        >
+                          View
+                        </a>
+                      </td>
+                    </tr>
+
+                    {% endfor %}
+                  </tbody>
+                </table>
+
+                <!-- EMPTY STATE -->
+
+                <p class="no-rows" id="noCertified">
+                  No certified doctors yet.
+                </p>
+              </div>
+            </div>
+
+            <!--  SIDE COLUMN-->
+
+            <div>
+              <!-- =VERIFICATION SUMMARY -->
+
+              <div class="panel">
+                <div class="panel-header">
+                  <h2>Verification Summary</h2>
+                </div>
+
+                <!-- PENDING -->
+
+                <div class="mini-card">
+                  <div
+                    class="dash-stat-icon icon-orange"
+                    style="width: 36px; height: 36px; font-size: 15px"
+                  >
+                    ⏳
+                  </div>
+
+                  <div>
+                    <h4>{{pending_doctors}} Pending</h4>
+
+                    <span> Awaiting your review </span>
+                  </div>
+                </div>
+
+                <!-- CERTIFIED -->
+
+                <div class="mini-card">
+                  <div
+                    class="dash-stat-icon icon-green"
+                    style="width: 36px; height: 36px; font-size: 15px"
+                  >
+                    ✅
+                  </div>
+
+                  <div>
+                    <h4>{{certified_doctors}} Certified</h4>
+
+                    <span> Visible to patients </span>
+                  </div>
+                </div>
+
+                <!-- REJECTED -->
+
+                <div class="mini-card">
+                  <div
+                    class="dash-stat-icon icon-red"
+                    style="width: 36px; height: 36px; font-size: 15px"
+                  >
+                    ❌
+                  </div>
+
+                  <div>
+                    <h4>{{rejected_doctors}} Rejected</h4>
+
+                    <span> Registration not approved </span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- = VERIFICATION PROGRESS-->
+
+              <div class="panel">
+                <div class="panel-header">
+                  <h2>Verification Progress</h2>
+                </div>
+
+                <p style="font-size: 13px; color: #888; margin-bottom: 4px">
+                  Doctors verified
+                </p>
+
+                <div class="progress-track">
+                  <div
+                    class="progress-fill"
+                    style="width: {{verified_percent}}%;"
+                  ></div>
+                </div>
+
+                <p style="font-size: 12px; color: #aaa; margin-top: 6px">
+                  {{certified_doctors}} of {{total_doctors}} doctors certified
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
