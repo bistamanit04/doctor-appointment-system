@@ -6,6 +6,7 @@ class DoctorController:
 
     @staticmethod
     def DOClist(request):
+    
 
         connection = get_connection()
         cursor = connection.cursor()
