@@ -58,12 +58,13 @@
         <div
           class="doctor-card"
           data-specialty="{{doctor[2]}}"
-          data-name="{{doctors[1]}}"
+          data-name="{{doctor[1]}}"
+          data-status="{{doctor[5]}}"
         >
           <div class="doctor-card-top">
             <img src="{{doctor[6]}}" alt="{{doctor[6]}}" />
-            <div class="doctor-card-badge status-available">
-              Available Today
+            <div class="doctor-card-badge status-{{doctor[5]}}">
+              {{doctor[5]}}
             </div>
           </div>
           <h3>"{{doctor[1]}}"</h3>

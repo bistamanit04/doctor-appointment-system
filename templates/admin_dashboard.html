@@ -10,10 +10,10 @@
   </head>
 
   <body>
-    <script src="/static/js/admin_dash.js" defer></script>
+  <script src="/static/js/admin_dash.js" defer></script>
 
     <div class="dashboard-wrapper">
-      <!-- SIDEBAR-->
+      <!-- SIDEBAR -->
 
       <aside class="sidebar" id="sidebar">
         <div class="logo">
@@ -63,10 +63,10 @@
         </div>
       </aside>
 
-      <!-- MAIN DASHBOAR-->
+      <!-- MAIN DASHBOARD -->
 
       <div class="dashboard-main">
-        <!-- TOP BAR-->
+        <!-- TOP BAR -->
 
         <header class="dashboard-topbar">
           <button class="menu-toggle" id="menuToggle">&#9776;</button>
@@ -98,7 +98,7 @@
           </div>
         </header>
 
-        <!-- DASHBOARD CONTENT-->
+        <!-- DASHBOARD CONTENT -->
 
         <div class="dashboard-content">
           <!-- WELCOME BANNER -->
@@ -118,7 +118,7 @@
             </a>
           </div>
 
-          <!--STATISTICS -->
+          <!-- STATISTICS -->
 
           <div class="dash-stats admin-stats">
             <!-- TOTAL DOCTORS -->
@@ -170,23 +170,29 @@
             </div>
           </div>
 
-          <!-- SECTION DIVIDER-->
+          <!-- SECTION DIVIDER -->
 
           <div class="section-divider">
             <h2>Doctor Verification</h2>
           </div>
 
-          <!--DASHBOARD GRID= -->
+          <!-- DASHBOARD GRID -->
 
           <div class="dash-grid">
-            <!-- =MAIN COLUMN -->
+            <!-- MAIN COLUMN -->
 
             <div>
-              <!--PENDING DOCTORS-->
+              <!-- =================================================
+                   PENDING DOCTORS
+              ================================================== -->
 
               <div class="panel">
                 <div class="panel-header">
                   <h2>Pending Doctors</h2>
+
+                  <!-- IMPORTANT:
+                       No doc[...] here because we are outside
+                       the for loop. -->
 
                   <a href="/admin/doctors?status=pending"> View All → </a>
                 </div>
@@ -240,7 +246,19 @@
 
                           <a
                             class="action-btn view-doc-btn"
-                            href="/admin/doctor/{{doc[0]}}"
+                            href="#"
+                            data-name="{{doc[1]}}"
+                            data-specialization="{{doc[2]}}"
+                            data-email="{{doc[3]}}"
+                            data-phone="{{doc[4]}}"
+                            data-status="{{doc[5]}}"
+                            data-image="{{doc[6]}}"
+                            data-nmc="{{doc[7]}}"
+                            data-experience="{{doc[8]}}"
+                            data-qualification="{{doc[9]}}"
+                            data-location="{{doc[10]}}"
+                            data-about="{{doc[11]}}"
+                            data-fee="{{doc[12]}}"
                           >
                             View
                           </a>
@@ -290,11 +308,16 @@
                 </p>
               </div>
 
-              <!--  RECENTLY REJECTED-->
+              <!-- =================================================
+                   RECENTLY REJECTED
+              ================================================== -->
 
               <div class="panel">
                 <div class="panel-header">
                   <h2>Recently Rejected</h2>
+
+                  <!-- IMPORTANT:
+                       No doc[...] here either. -->
 
                   <a href="/admin/doctors?status=rejected"> View All → </a>
                 </div>
@@ -349,7 +372,19 @@
                       <td data-label="Action">
                         <a
                           class="action-btn view-doc-btn"
-                          href="/admin/doctor/{{doc[0]}}"
+                          href="#"
+                          data-name="{{doc[1]}}"
+                          data-specialization="{{doc[2]}}"
+                          data-email="{{doc[3]}}"
+                          data-phone="{{doc[4]}}"
+                          data-status="{{doc[5]}}"
+                          data-image="{{doc[6]}}"
+                          data-nmc="{{doc[7]}}"
+                          data-experience="{{doc[8]}}"
+                          data-qualification="{{doc[9]}}"
+                          data-location="{{doc[10]}}"
+                          data-about="{{doc[11]}}"
+                          data-fee="{{doc[12]}}"
                         >
                           View
                         </a>
@@ -365,7 +400,9 @@
                 <p class="no-rows" id="noRejected">No rejected doctors.</p>
               </div>
 
-              <!-- RECENTLY CERTIFIED-->
+              <!-- =================================================
+                   RECENTLY CERTIFIED
+              ================================================== -->
 
               <div class="panel">
                 <div class="panel-header">
@@ -394,7 +431,7 @@
                       <td data-label="Name">
                         <div class="table-person">
                           <img
-                            src="{{doc[5]}}"
+                            src="{{doc[6]}}"
                             onerror="this.src = '/static/img/doctor.jpeg'"
                             alt=""
                           />
@@ -422,9 +459,25 @@
                       <!-- ACTION -->
 
                       <td data-label="Action">
+                        <!-- FIXED:
+                             Certified doctor now has all
+                             profile data just like the others. -->
+
                         <a
                           class="action-btn view-doc-btn"
-                          href="/admin/doctor/{{doc[0]}}"
+                          href="#"
+                          data-name="{{doc[1]}}"
+                          data-specialization="{{doc[2]}}"
+                          data-email="{{doc[3]}}"
+                          data-phone="{{doc[4]}}"
+                          data-status="{{doc[5]}}"
+                          data-image="{{doc[6]}}"
+                          data-nmc="{{doc[7]}}"
+                          data-experience="{{doc[8]}}"
+                          data-qualification="{{doc[9]}}"
+                          data-location="{{doc[10]}}"
+                          data-about="{{doc[11]}}"
+                          data-fee="{{doc[12]}}"
                         >
                           View
                         </a>
@@ -443,10 +496,12 @@
               </div>
             </div>
 
-            <!--  SIDE COLUMN-->
+            <!-- =================================================
+                 SIDE COLUMN
+            ================================================== -->
 
             <div>
-              <!-- =VERIFICATION SUMMARY -->
+              <!-- VERIFICATION SUMMARY -->
 
               <div class="panel">
                 <div class="panel-header">
@@ -505,7 +560,7 @@
                 </div>
               </div>
 
-              <!-- = VERIFICATION PROGRESS-->
+              <!-- VERIFICATION PROGRESS -->
 
               <div class="panel">
                 <div class="panel-header">
@@ -529,6 +584,92 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================
+         DOCTOR PROFILE MODAL
+    ========================================================== -->
+
+    <div class="profile-modal" id="profileModal">
+      <div class="profile-modal-content">
+        <!-- CLOSE -->
+
+        <button
+          type="button"
+          class="profile-modal-close"
+          id="profileModalClose"
+        >
+          &times;
+        </button>
+
+        <!-- DOCTOR HEADER -->
+
+        <div class="profile-modal-header">
+          <img id="profileImage" src="/static/img/doctor.jpeg" alt="Doctor" />
+
+          <div>
+            <h2 id="profileName"></h2>
+
+            <p id="profileSpecialization"></p>
+
+            <span id="profileStatus"></span>
+          </div>
+        </div>
+
+        <!-- DOCTOR DETAILS -->
+
+        <div class="profile-details">
+          <div class="profile-detail">
+            <strong> NMC Number </strong>
+
+            <span id="profileNmc"></span>
+          </div>
+
+          <div class="profile-detail">
+            <strong> Experience </strong>
+
+            <span id="profileExperience"></span>
+          </div>
+
+          <div class="profile-detail">
+            <strong> Qualification </strong>
+
+            <span id="profileQualification"></span>
+          </div>
+
+          <div class="profile-detail">
+            <strong> Email </strong>
+
+            <span id="profileEmail"></span>
+          </div>
+
+          <div class="profile-detail">
+            <strong> Phone </strong>
+
+            <span id="profilePhone"></span>
+          </div>
+
+          <div class="profile-detail">
+            <strong> Location </strong>
+
+            <span id="profileLocation"></span>
+          </div>
+
+          <div class="profile-detail">
+            <strong> Consultation Fee </strong>
+
+            <span id="profileFee"></span>
+          </div>
+        </div>
+
+        <!-- ABOUT -->
+
+        <div class="profile-about">
+          <h3>About Doctor</h3>
+
+          <p id="profileAbout"></p>
         </div>
       </div>
     </div>

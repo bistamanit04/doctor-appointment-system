@@ -28,6 +28,7 @@ class DoctorController:
             FROM doctor
             LEFT JOIN doctor_bio
                 ON doctor.doctor_id = doctor_bio.doctor_id
+            WHERE doctor.status IN ('Pending', 'Certified')
             ORDER BY doctor.name
         """)
 

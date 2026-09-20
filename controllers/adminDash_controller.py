@@ -1,4 +1,3 @@
-
 from template_engine import TemplateEngine
 from database import get_connection
 from session import get_session
@@ -9,10 +8,8 @@ class AdminDashboardController:
     @staticmethod
     def dashboard(request):
 
-        # =====================================================
+     
         # GET SESSION COOKIE
-        # =====================================================
-
         cookie = request.headers.get("Cookie", "")
 
         session_id = None
@@ -28,9 +25,9 @@ class AdminDashboardController:
                 break
 
 
-        # =====================================================
+      
         # CHECK SESSION
-        # =====================================================
+      
 
         session = get_session(session_id)
 
@@ -48,9 +45,9 @@ class AdminDashboardController:
             return
 
 
-        # =====================================================
+      
         # CHECK USER TYPE
-        # =====================================================
+     
 
         if session.get("user_type") != "admin":
 
@@ -66,25 +63,23 @@ class AdminDashboardController:
             return
 
 
-        # =====================================================
+       
         # GET ADMIN ID
-        # =====================================================
+       
 
         admin_id = session.get("user_id")
 
 
-        # =====================================================
+       
         # DATABASE CONNECTION
-        # =====================================================
-
+       
         connection = get_connection()
 
         cursor = connection.cursor()
 
 
-        # =====================================================
+        
         # GET ADMIN INFORMATION
-        # =====================================================
 
         cursor.execute(
             """
@@ -100,10 +95,8 @@ class AdminDashboardController:
         admin = cursor.fetchone()
 
 
-        # =====================================================
+    
         # ADMIN NOT FOUND
-        # =====================================================
-
         if not admin:
 
             connection.close()
@@ -123,11 +116,9 @@ class AdminDashboardController:
         admin_name = admin[0]
 
 
-        # =====================================================
+      
         # DOCTOR COUNTS
-        # =====================================================
-
-
+        
         # Total doctors
 
         cursor.execute(
@@ -177,12 +168,6 @@ class AdminDashboardController:
         )
 
         rejected_doctors = cursor.fetchone()[0]
-
-
-        # =====================================================
-        # PENDING DOCTORS
-        # =====================================================
-
         cursor.execute(
             """
             SELECT
@@ -193,7 +178,12 @@ class AdminDashboardController:
                 doctor.phone,
                 doctor.status,
                 doctor_bio.profile_image,
-                doctor_bio.nmc_no
+                doctor_bio.nmc_no,
+                doctor_bio.experience,
+                doctor_bio.qualification,
+                doctor_bio.location,
+                doctor_bio.about,
+                doctor_bio.consultation_fee
 
             FROM doctor
 
@@ -209,10 +199,8 @@ class AdminDashboardController:
         pending_list = cursor.fetchall()
 
 
-        # =====================================================
-        # CERTIFIED DOCTORS
-        # =====================================================
-
+        
+        # CERTIFIED DOCTOR
         cursor.execute(
             """
             SELECT
@@ -223,7 +211,12 @@ class AdminDashboardController:
                 doctor.phone,
                 doctor.status,
                 doctor_bio.profile_image,
-                doctor_bio.nmc_no
+                doctor_bio.nmc_no,
+                doctor_bio.experience,
+                doctor_bio.qualification,
+                doctor_bio.location,
+                doctor_bio.about,
+                doctor_bio.consultation_fee
 
             FROM doctor
 
@@ -239,9 +232,9 @@ class AdminDashboardController:
         certified_list = cursor.fetchall()
 
 
-        # =====================================================
+       
         # REJECTED DOCTORS
-        # =====================================================
+     
 
         cursor.execute(
             """
@@ -253,7 +246,12 @@ class AdminDashboardController:
                 doctor.phone,
                 doctor.status,
                 doctor_bio.profile_image,
-                doctor_bio.nmc_no
+                doctor_bio.nmc_no,
+                doctor_bio.experience,
+                doctor_bio.qualification,
+                doctor_bio.location,
+                doctor_bio.about,
+                doctor_bio.consultation_fee
 
             FROM doctor
 
@@ -269,10 +267,7 @@ class AdminDashboardController:
         rejected_list = cursor.fetchall()
 
 
-        # =====================================================
         # VERIFICATION PERCENTAGE
-        # =====================================================
-
         if total_doctors > 0:
 
             verified_percent = round(
@@ -284,17 +279,13 @@ class AdminDashboardController:
             verified_percent = 0
 
 
-        # =====================================================
+   
         # CLOSE DATABASE
-        # =====================================================
-
         connection.close()
 
 
-        # =====================================================
+    
         # RENDER ADMIN DASHBOARD
-        # =====================================================
-
         TemplateEngine.render(
             request,
             "admin_dashboard.html",

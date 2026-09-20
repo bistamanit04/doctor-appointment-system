@@ -344,3 +344,13 @@ body {
     flex-direction: column;
   }
 }
+.doctor-card-badge.status-Certified {
+  background: #e6f8ee;
+  color: #17a35a;
+}
+ 
+.doctor-card-badge.status-Pending {
+  background: #fff3e6;
+  color: #e08c1a;
+}
+ 
