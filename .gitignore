@@ -12,3 +12,6 @@ doctor.db
 static/uploads/doctors/*.jpg
 static/uploads/doctors/*.jpeg
 static/uploads/doctors/*.png
+static/uploads/*.jpg
+static/uploads/*.jpeg
+static/uploads/*.png
