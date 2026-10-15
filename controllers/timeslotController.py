@@ -282,6 +282,7 @@ class TimeSlotController:
         else:
             notice_text = (
                 "Your account is awaiting verification by an administrator. "
+                "please fill up all the info in your profile for verification, WARNING ! insufficient info account will be rejected."
                 "You'll be able to create time slots as soon as you're certified."
             )
 
