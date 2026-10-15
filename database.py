@@ -131,6 +131,19 @@ def create_tables():
          )
     """)
 
+    # Sessions table -- persists logins across server restarts
+    # (previously an in-memory dict in session.py, which got
+    # wiped any time the process restarted, e.g. on auto-reload
+    # after a file was written to static/uploads/).
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS sessions (
+            session_id TEXT PRIMARY KEY,
+            user_type TEXT NOT NULL,
+            user_id INTEGER NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
+
 
 
 
@@ -140,4 +153,3 @@ def create_tables():
 
 if __name__ == "__main__":
     create_tables()
-

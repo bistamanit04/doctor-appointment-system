@@ -23,7 +23,9 @@
 
         <ul class="sidebar-nav">
           <li class="active">
-            <a href="/doctor/dashboard"><span class="icon">🏠</span> Dashboard</a>
+            <a href="/doctor/dashboard"
+              ><span class="icon">🏠</span> Dashboard</a
+            >
           </li>
           <li>
             <a href="#"><span class="icon">📅</span> Appointments</a>
@@ -32,10 +34,12 @@
             <a href="#"><span class="icon">🧑‍🤝‍🧑</span> My Patients</a>
           </li>
           <li>
-            <a href="#"><span class="icon">🗓️</span> Availability</a>
+            <a href="/doctor/availability"><span class="icon">🗓️</span> Availability</a>
           </li>
           <li>
-            <a href="/doctor/profile"><span class="icon">💬</span> My profile</a>
+            <a href="/doctor/profile"
+              ><span class="icon">💬</span> My profile</a
+            >
           </li>
         </ul>
 
@@ -55,10 +59,12 @@
 
           <div class="topbar-right">
             <div class="topbar-icon">
-              🔔
               <span class="dot"></span>
             </div>
-            <div class="topbar-profile" onclick="window.location.href='/doctor/profile'">
+            <div
+              class="topbar-profile"
+              onclick="window.location.href = '/doctor/profile'"
+            >
               <img src="{{profile_image}}" alt="doctor avatar" />
               <div>
                 <div class="name">{{name}}</div>
@@ -74,8 +80,8 @@
             <div>
               <h1>Good morning, {{name}} 👋</h1>
               <p>
-                You have 6 appointments today, including 2 new patients.
-                Your next appointment starts in 45 minutes.
+                You have 6 appointments today, including 2 new patients. Your
+                next appointment starts in 45 minutes.
               </p>
             </div>
             <button>View Today's Schedule</button>
@@ -120,7 +126,9 @@
           <div class="panel" id="requestsPanel">
             <div class="panel-header">
               <h2>Appointment Requests</h2>
-              <span style="font-size: 13px; color: #999;" id="requestsRemaining">3 pending</span>
+              <span style="font-size: 13px; color: #999" id="requestsRemaining"
+                >3 pending</span
+              >
             </div>
 
             <table class="data-table" id="requestsTable">
@@ -134,44 +142,98 @@
                 </tr>
               </thead>
               <tbody>
-                <tr data-patient="Jhon Doe" data-date="Sep 8" data-time="10:00 AM">
+                <tr
+                  data-patient="Jhon Doe"
+                  data-date="Sep 8"
+                  data-time="10:00 AM"
+                >
                   <td>Jhon Doe</td>
                   <td>Sep 8</td>
                   <td>10:00 AM</td>
-                  <td><span class="status-badge status-pending">Pending</span></td>
+                  <td>
+                    <span class="status-badge status-pending">Pending</span>
+                  </td>
                   <td class="action-cell">
-                    <button class="approve-btn" onclick="handleRequest(this, 'approve')">Approve</button>
-                    <button class="reject-btn-sm" onclick="handleRequest(this, 'reject')">Reject</button>
+                    <button
+                      class="approve-btn"
+                      onclick="handleRequest(this, 'approve')"
+                    >
+                      Approve
+                    </button>
+                    <button
+                      class="reject-btn-sm"
+                      onclick="handleRequest(this, 'reject')"
+                    >
+                      Reject
+                    </button>
                   </td>
                 </tr>
 
-                <tr data-patient="Emma Smith" data-date="Sep 8" data-time="11:00 AM">
+                <tr
+                  data-patient="Emma Smith"
+                  data-date="Sep 8"
+                  data-time="11:00 AM"
+                >
                   <td>Emma Smith</td>
                   <td>Sep 8</td>
                   <td>11:00 AM</td>
-                  <td><span class="status-badge status-pending">Pending</span></td>
+                  <td>
+                    <span class="status-badge status-pending">Pending</span>
+                  </td>
                   <td class="action-cell">
-                    <button class="approve-btn" onclick="handleRequest(this, 'approve')">Approve</button>
-                    <button class="reject-btn-sm" onclick="handleRequest(this, 'reject')">Reject</button>
+                    <button
+                      class="approve-btn"
+                      onclick="handleRequest(this, 'approve')"
+                    >
+                      Approve
+                    </button>
+                    <button
+                      class="reject-btn-sm"
+                      onclick="handleRequest(this, 'reject')"
+                    >
+                      Reject
+                    </button>
                   </td>
                 </tr>
 
-                <tr data-patient="Ethan Brooks" data-date="Sep 9" data-time="3:30 PM">
+                <tr
+                  data-patient="Ethan Brooks"
+                  data-date="Sep 9"
+                  data-time="3:30 PM"
+                >
                   <td>Ethan Brooks</td>
                   <td>Sep 9</td>
                   <td>3:30 PM</td>
-                  <td><span class="status-badge status-pending">Pending</span></td>
+                  <td>
+                    <span class="status-badge status-pending">Pending</span>
+                  </td>
                   <td class="action-cell">
-                    <button class="approve-btn" onclick="handleRequest(this, 'approve')">Approve</button>
-                    <button class="reject-btn-sm" onclick="handleRequest(this, 'reject')">Reject</button>
+                    <button
+                      class="approve-btn"
+                      onclick="handleRequest(this, 'approve')"
+                    >
+                      Approve
+                    </button>
+                    <button
+                      class="reject-btn-sm"
+                      onclick="handleRequest(this, 'reject')"
+                    >
+                      Reject
+                    </button>
                   </td>
                 </tr>
 
-                <tr data-patient="Alex Brown" data-date="Sep 9" data-time="2:00 PM">
+                <tr
+                  data-patient="Alex Brown"
+                  data-date="Sep 9"
+                  data-time="2:00 PM"
+                >
                   <td>Alex Brown</td>
                   <td>Sep 9</td>
                   <td>2:00 PM</td>
-                  <td><span class="status-badge status-approved">Approved</span></td>
+                  <td>
+                    <span class="status-badge status-approved">Approved</span>
+                  </td>
                   <td class="action-cell">
                     <button class="action-btn">View</button>
                   </td>
@@ -179,7 +241,9 @@
               </tbody>
             </table>
 
-            <p class="no-requests" id="noRequests">No pending appointment requests 🎉</p>
+            <p class="no-requests" id="noRequests">
+              No pending appointment requests 🎉
+            </p>
           </div>
 
           <!-- Main grid -->
@@ -192,35 +256,7 @@
                   <a href="#">View Calendar</a>
                 </div>
 
-                <div class="appt-row">
-                  <img src="doctor.jpeg" alt="Amelia Turner" />
-                  <div class="appt-info">
-                    <h4>Amelia Turner</h4>
-                    <span>Skin consultation · New patient</span>
-                  </div>
-                  <div class="appt-time">9:00 AM</div>
-                  <span class="status-badge status-upcoming">Upcoming</span>
-                </div>
-
-                <div class="appt-row">
-                  <img src="doctor.jpeg" alt="James Wu" />
-                  <div class="appt-info">
-                    <h4>James Wu</h4>
-                    <span>Follow-up · Eczema</span>
-                  </div>
-                  <div class="appt-time">10:30 AM</div>
-                  <span class="status-badge status-upcoming">Upcoming</span>
-                </div>
-
-                <div class="appt-row">
-                  <img src="doctor.jpeg" alt="Priya Nair" />
-                  <div class="appt-info">
-                    <h4>Priya Nair</h4>
-                    <span>Routine checkup</span>
-                  </div>
-                  <div class="appt-time">1:00 PM</div>
-                  <span class="status-badge status-pending">Pending</span>
-                </div>
+                
 
                 <div class="appt-row">
                   <img src="doctor.jpeg" alt="Carlos Diaz" />
@@ -260,7 +296,11 @@
                       </td>
                       <td>Sep 3, 2026</td>
                       <td>Skin allergy</td>
-                      <td><span class="status-badge status-upcoming">Ongoing</span></td>
+                      <td>
+                        <span class="status-badge status-upcoming"
+                          >Ongoing</span
+                        >
+                      </td>
                       <td><button class="action-btn">View</button></td>
                     </tr>
                     <tr>
@@ -272,21 +312,14 @@
                       </td>
                       <td>Aug 28, 2026</td>
                       <td>Eczema</td>
-                      <td><span class="status-badge status-completed">Recovered</span></td>
-                      <td><button class="action-btn">View</button></td>
-                    </tr>
-                    <tr>
                       <td>
-                        <div class="table-person">
-                          <img src="doctor.jpeg" alt="Priya Nair" />
-                          Priya Nair
-                        </div>
+                        <span class="status-badge status-completed"
+                          >Recovered</span
+                        >
                       </td>
-                      <td>Aug 20, 2026</td>
-                      <td>Routine checkup</td>
-                      <td><span class="status-badge status-pending">Review Due</span></td>
                       <td><button class="action-btn">View</button></td>
                     </tr>
+                    
                   </tbody>
                 </table>
               </div>
@@ -300,7 +333,12 @@
                 </div>
 
                 <div class="mini-card">
-                  <div class="dash-stat-icon icon-orange" style="width:36px;height:36px;font-size:15px;">⏳</div>
+                  <div
+                    class="dash-stat-icon icon-orange"
+                    style="width: 36px; height: 36px; font-size: 15px"
+                  >
+                    ⏳
+                  </div>
                   <div>
                     <h4 id="summaryPending">3 Pending</h4>
                     <span>Awaiting your response</span>
@@ -308,7 +346,12 @@
                 </div>
 
                 <div class="mini-card">
-                  <div class="dash-stat-icon icon-green" style="width:36px;height:36px;font-size:15px;">✅</div>
+                  <div
+                    class="dash-stat-icon icon-green"
+                    style="width: 36px; height: 36px; font-size: 15px"
+                  >
+                    ✅
+                  </div>
                   <div>
                     <h4 id="summaryAccepted">0 Accepted</h4>
                     <span>Added to your schedule</span>
@@ -316,7 +359,12 @@
                 </div>
 
                 <div class="mini-card">
-                  <div class="dash-stat-icon icon-purple" style="width:36px;height:36px;font-size:15px;">✖️</div>
+                  <div
+                    class="dash-stat-icon icon-purple"
+                    style="width: 36px; height: 36px; font-size: 15px"
+                  >
+                    ✖️
+                  </div>
                   <div>
                     <h4 id="summaryRejected">0 Rejected</h4>
                     <span>Declined this week</span>
@@ -324,24 +372,6 @@
                 </div>
               </div>
 
-              <div class="panel">
-                <div class="panel-header">
-                  <h2>This Week</h2>
-                </div>
-
-                <p style="font-size: 13px; color: #888; margin-bottom: 4px;">
-                  Appointment slots filled
-                </p>
-                <div class="progress-track">
-                  <div class="progress-fill" style="width: 82%;"></div>
-                </div>
-
-                <p style="font-size: 13px; color: #888; margin: 16px 0 4px;">
-                  Patient satisfaction
-                </p>
-                <div class="progress-track">
-                  <div class="progress-fill" style="width: 96%;"></div>
-                </div>
               </div>
             </div>
           </div>

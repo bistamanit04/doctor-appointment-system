@@ -12,6 +12,7 @@ from controllers.docbio_controller import DoctorBioController
 from controllers.adminLogin_controller import AdminLoginController
 from controllers.adminDash_controller import AdminDashboardController
 from controllers.admin_doc_controller import AdminDoctorController
+from controllers.timeslotController import TimeSlotController
 
 
 class Router:
@@ -80,6 +81,7 @@ class Router:
             "/doctor/profile": DoctorBioController.show,
             "/admin/login": AdminLoginController.show,
             "/admin/dashboard": AdminDashboardController.dashboard,
+            "/doctor/availability": TimeSlotController.show,
         }
 
         handler = routes.get(path)
@@ -104,6 +106,9 @@ class Router:
             "/admin/login": AdminLoginController.login,
             "/admin/doctor/certify": AdminDoctorController.certify,
             "/admin/doctor/reject": AdminDoctorController.reject,
+            "/doctor/slots/add": TimeSlotController.add,
+            "/doctor/slots/update": TimeSlotController.update,
+            "/doctor/slots/delete": TimeSlotController.delete,
         }
 
         handler = routes.get(path)

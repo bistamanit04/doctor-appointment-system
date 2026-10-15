@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="/static/css/dash.css" />
+    <link rel="stylesheet" href="/static/css/availability.css" />
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{{title}}</title>
+
+  </head>
+
+  <body>
+    <script src="/static/js/availabiliity.js" defer></script>
+
+    <div class="dashboard-wrapper">
+      <!-- ===== Sidebar ===== -->
+      <aside class="sidebar" id="sidebar">
+        <div class="logo">
+          <img src="/static/img/logo.png" alt="logo" />
+          <div>
+            <h2>Doctor Appointment</h2>
+            <p>System</p>
+          </div>
+        </div>
+
+        <ul class="sidebar-nav">
+          <li>
+            <a href="/doctor/dashboard"><span class="icon">🏠</span> Dashboard</a>
+          </li>
+          <li>
+            <a href="#"><span class="icon">📅</span> Appointments</a>
+          </li>
+          <li>
+            <a href="#"><span class="icon">🧑‍🤝‍🧑</span> My Patients</a>
+          </li>
+          <li class="active">
+            <a href="/doctor/availability"><span class="icon">🗓️</span> Availability</a>
+          </li>
+          <li>
+            <a href="/doctor/profile"><span class="icon">⚙️</span> Profile</a>
+          </li>
+        </ul>
+
+        <div class="sidebar-footer">
+          <a href="/logout"><span class="icon">↩️</span> Log Out</a>
+        </div>
+      </aside>
+
+      <!-- ===== Main ===== -->
+      <div class="dashboard-main">
+        <header class="dashboard-topbar">
+          <button class="menu-toggle" id="menuToggle">&#9776;</button>
+
+          <div class="topbar-search">
+            <input type="text" placeholder="Search patients, appointments..." />
+          </div>
+
+          <div class="topbar-right">
+            <div class="topbar-icon">
+              🔔
+              <span class="dot"></span>
+            </div>
+            <div class="topbar-profile" onclick="window.location.href='/doctor/profile'">
+              <img
+                src="{{profile_image}}"
+                onerror="this.src='/static/img/doctor.jpeg'"
+                alt="doctor avatar"
+              />
+              <div>
+                <div class="name">Dr. {{name}}</div>
+                <div class="role">{{specialization}}</div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <div class="dashboard-content">
+          <!-- Welcome banner -->
+          <div class="welcome-banner">
+            <div>
+              <h1>Manage Your Availability 🗓️</h1>
+              <p>
+                Create new time slots for patients to book, and edit or
+                remove slots you've already added.
+              </p>
+            </div>
+          </div>
+
+          <!-- Shown only when the doctor is not certified -->
+          <div class="slot-notice" style="display: {{notice_display}};">
+            <span>🔒</span>
+            <div>
+              <strong>Creating time slots is locked</strong>
+              {{notice_text}}
+            </div>
+          </div>
+
+          <!-- Add Slot Panel (hidden unless certified) -->
+          <div class="panel" style="display: {{form_display}};">
+            <div class="panel-header">
+              <h2>Add New Time Slot</h2>
+            </div>
+
+            <form id="addSlotForm" class="slot-form" novalidate>
+              <div class="slot-field" id="group-date">
+                <label for="slot_date">Date</label>
+                <input type="date" id="slot_date" name="date" required />
+                <span class="slot-field-error">Select a valid date (today or later).</span>
+              </div>
+
+              <div class="slot-field" id="group-start">
+                <label for="start_time">Start Time</label>
+                <input type="time" id="start_time" name="start_time" required />
+                <span class="slot-field-error">Enter a start time.</span>
+              </div>
+
+              <div class="slot-field" id="group-end">
+                <label for="end_time">End Time</label>
+                <input type="time" id="end_time" name="end_time" required />
+                <span class="slot-field-error">End time must be after start time.</span>
+              </div>
+
+              <button type="submit" class="action-btn slot-add-btn">
+                ＋ Add Slot
+              </button>
+            </form>
+          </div>
+
+          <!-- Slots Panel -->
+          <div class="panel">
+            <div class="panel-header">
+              <h2>Your Time Slots</h2>
+              <span style="font-size: 13px; color: #999;" id="slotCount">
+                {{slot_count}} slots
+              </span>
+            </div>
+
+            <table class="data-table slot-table" id="slotsTable">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Start</th>
+                  <th>End</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+
+              <tbody id="slotsTableBody">
+                {% for slot in slots %}
+                <tr data-slot-id="{{slot[0]}}">
+                  <td class="cell-date" data-label="Date">{{slot[1]}}</td>
+                  <td class="cell-start" data-label="Start">{{slot[2]}}</td>
+                  <td class="cell-end" data-label="End">{{slot[3]}}</td>
+                  <td class="cell-status" data-label="Status">
+                    <span class="status-badge status-slot-{{slot[4]}}">{{slot[4]}}</span>
+                  </td>
+                  <td data-label="Actions">
+                    <div class="slot-actions">
+                      <button class="action-btn slot-edit-btn" type="button">✏️ Edit</button>
+                      <button class="action-btn slot-delete-btn" type="button">🗑️ Delete</button>
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+
+            <p class="no-slots" id="noSlots">
+              No time slots yet.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast">
+      <span id="toastMsg"></span>
+    </div>
+  </body>
+</html>

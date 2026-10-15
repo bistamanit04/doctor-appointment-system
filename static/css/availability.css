@@ -1,0 +1,254 @@
+
+.slot-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: 18px;
+  align-items: start;
+}
+
+.slot-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.slot-field label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 7px;
+}
+
+.slot-field input {
+  border: 1px solid #e5e9f4;
+  background: #f7f9fc;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 14px;
+  outline: none;
+}
+
+.slot-field input:focus {
+  border-color: #1a4fd6;
+  background: #fff;
+}
+
+.slot-field-error {
+  color: #e5484d;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 5px;
+  display: none;
+}
+
+.slot-field.invalid input {
+  border-color: #e5484d;
+}
+
+.slot-field.invalid .slot-field-error {
+  display: block;
+}
+
+.slot-add-btn {
+  background: #1a4fd6;
+  color: #fff;
+  padding: 11px 20px;
+  height: 42px;
+  align-self: end;
+  font-size: 14px;
+}
+
+.slot-add-btn:hover {
+  background: #163fb0;
+  color: #fff;
+}
+
+/* ----- Slot status badges ----- */
+.status-slot-available {
+  background: #e6f8ee;
+  color: #17a35a;
+}
+
+.status-slot-booked {
+  background: #fff3e6;
+  color: #e08c1a;
+}
+
+.status-slot-cancelled {
+  background: #fdeaea;
+  color: #e5484d;
+}
+
+.status-slot-unavailable {
+  background: #eef1f8;
+  color: #888;
+}
+
+/* ----- Row actions ----- */
+.slot-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.slot-edit-btn,
+.slot-delete-btn {
+  padding: 6px 12px;
+  font-size: 12px;
+}
+
+.slot-delete-btn {
+  background: #fdeaea;
+  color: #e5484d;
+}
+
+.slot-delete-btn:hover {
+  background: #e5484d;
+  color: #fff;
+}
+
+/* ----- Inline edit mode ----- */
+.slot-table td.editing input,
+.slot-table td.editing select {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid #1a4fd6;
+  border-radius: 6px;
+  font-size: 13px;
+  outline: none;
+}
+
+.slot-save-btn {
+  background: #e6f8ee;
+  color: #17a35a;
+}
+
+.slot-save-btn:hover {
+  background: #17a35a;
+  color: #fff;
+}
+
+.slot-cancel-btn {
+  background: #eef1f8;
+  color: #666;
+}
+
+.slot-cancel-btn:hover {
+  background: #ccc;
+  color: #222;
+}
+
+/* ----- Empty state ----- */
+.no-slots {
+  display: none;
+  text-align: center;
+  color: #999;
+  font-size: 14px;
+  padding: 30px 0;
+}
+
+/* ----- Toast (was referenced in HTML but never styled) ----- */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: #222;
+  color: #fff;
+  padding: 14px 24px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 999;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.toast.toast-success {
+  background: #17a35a;
+}
+
+.toast.toast-error {
+  background: #e5484d;
+}
+
+/* ----- Responsive: stack the slot table on small screens ----- */
+@media (max-width: 700px) {
+  .slot-form {
+    grid-template-columns: 1fr;
+  }
+
+  .slot-add-btn {
+    align-self: stretch;
+  }
+
+  .slot-table thead {
+    display: none;
+  }
+
+  .slot-table,
+  .slot-table tbody,
+  .slot-table tr,
+  .slot-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .slot-table tr {
+    border: 1px solid #eef1f8;
+    border-radius: 12px;
+    margin-bottom: 14px;
+    padding: 10px 14px;
+  }
+
+  .slot-table td {
+    border-bottom: none;
+    padding: 6px 0;
+  }
+
+  .slot-table td[data-label]::before {
+    content: attr(data-label);
+    display: inline-block;
+    width: 90px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #999;
+  }
+}
+
+/* ----- Disabled row buttons (booked slots) ----- */
+.slot-actions .action-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  background: #eef1f8;
+  color: #999;
+}
+
+.slot-actions .action-btn:disabled:hover {
+  background: #eef1f8;
+  color: #999;
+}
+
+/* ----- Locked notice (doctor not certified yet) ----- */
+.slot-notice {
+  align-items: flex-start;
+  gap: 12px;
+  background: #fff3e6;
+  color: #b86e00;
+  border: 1px solid #f6d3a6;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.slot-notice strong {
+  display: block;
+  margin-bottom: 4px;
+}
